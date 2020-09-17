@@ -1,0 +1,114 @@
+# 01 Defining A Message Type
+
+## Defining A Message Type
+
+## 定义消息类型
+
+First let's look at a very simple example. Let's say you want to define a search request message format, where each search request has a query string, the particular page of results you are interested in, and a number of results per page. Here's the .proto file you use to define the message type.
+
+首先让我们看一个非常简单的例子。比方说你想要定义一个搜索请求的消息形式，每个搜索请求都有一个查询字符串，你感兴趣的结果所在的特定的页，以及每页多少个结果的一个数字。这里就是你用来定义消息类型的 .proto 文件。
+
+```proto
+syntax = "proto3";
+
+message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+}
+```
+
+- The first line of the file specifies that you're using proto3 syntax: if you don't do this the protocol buffer compiler will assume you are using proto2. This must be the first non-empty, non-comment line of the file.
+
+- 文件中第一行指明了你正在使用 proto3 的句法：如果你不这样做，protocol buffer 编译器会假定你正在使用 proto2。文件的第一行，必须是这样的——既不能为空，也不能注释掉。
+
+- The SearchRequest message definition specifies three fields (name/value pairs), one for each piece of data that you want to include in this type of message. Each field has a name and a type.
+
+- SearchRequest 的消息定义指定了三个字段（名称/数值对儿），你想包含在此消息类型中的每一块数据，都各有一个。每个字段都有一个名称和一个类型。
+
+## Specifying Field Types
+
+## 指定字段类型
+
+In the above example, all the fields are scalar types: two integers (page_number and result_per_page) and a string (query). However, you can also specify composite types for your fields, including enumerations and other message types.
+
+在上面的例子中，所有字段都是标量类型：两个整数（page_number 和 result_per_page），以及一个字符串（query）。但是，你也可以为你的字段指定复合类型，包括枚举和其他消息类型。
+
+## Assigning Field Numbers
+
+## 分配字段编号
+
+As you can see, each field in the message definition has a unique number. These field numbers are used to identify your fields in the message binary format, and should not be changed once your message type is in use. Note that field numbers in the range 1 through 15 take one byte to encode, including the field number and the field's type (you can find out more about this in Protocol Buffer Encoding). Field numbers in the range 16 through 2047 take two bytes. So you should reserve the numbers 1 through 15 for very frequently occurring message elements. Remember to leave some room for frequently occurring elements that might be added in the future.
+
+就像你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在消息体的二进制形式中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 Protocol Buffer 编码中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的字段保留一些空间。
+
+The smallest field number you can specify is 1, and the largest is 229 - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
+
+你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（FieldDescriptor::kFirstReservedNumber 到 FieldDescriptor::kLastReservedNumber），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会不高兴了。同样地，你不能使用任何之前已经保留的字段编号。
+
+
+## Specifying Field Rules
+
+## 指定字段的规则
+
+Message fields can be one of the following:
+
+消息字段可以是下面所列中的某一类：
+
+- singular: a well-formed message can have zero or one of this field (but not more than one). And this is the default field rule for proto3 syntax.
+- `repeated`: this field can be repeated any number of times (including zero) in a well-formed message. The order of the repeated values will be preserved.
+
+In proto3, repeated fields of scalar numeric types use packed encoding by default.
+
+You can find out more about packed encoding in Protocol Buffer Encoding.
+Adding More Message Types
+
+Multiple message types can be defined in a single .proto file. This is useful if you are defining multiple related messages – so, for example, if you wanted to define the reply message format that corresponds to your SearchResponse message type, you could add it to the same .proto:
+
+message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;
+  int32 result_per_page = 3;
+}
+
+message SearchResponse {
+ ...
+}
+
+Adding Comments
+
+To add comments to your .proto files, use C/C++-style // and /* ... */ syntax.
+
+/* SearchRequest represents a search query, with pagination options to
+ * indicate which results to include in the response. */
+
+message SearchRequest {
+  string query = 1;
+  int32 page_number = 2;  // Which page number do we want?
+  int32 result_per_page = 3;  // Number of results to return per page.
+}
+
+Reserved Fields
+
+If you update a message type by entirely removing a field, or commenting it out, future users can reuse the field number when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the field numbers (and/or names, which can also cause issues for JSON serialization) of your deleted fields are reserved. The protocol buffer compiler will complain if any future users try to use these field identifiers.
+
+message Foo {
+  reserved 2, 15, 9 to 11;
+  reserved "foo", "bar";
+}
+
+Note that you can't mix field names and field numbers in the same reserved statement.
+What's Generated From Your .proto?
+
+When you run the protocol buffer compiler on a .proto, the compiler generates the code in your chosen language you'll need to work with the message types you've described in the file, including getting and setting field values, serializing your messages to an output stream, and parsing your messages from an input stream.
+
+    For C++, the compiler generates a .h and .cc file from each .proto, with a class for each message type described in your file.
+    For Java, the compiler generates a .java file with a class for each message type, as well as a special Builder classes for creating message class instances.
+    Python is a little different – the Python compiler generates a module with a static descriptor of each message type in your .proto, which is then used with a metaclass to create the necessary Python data access class at runtime.
+    For Go, the compiler generates a .pb.go file with a type for each message type in your file.
+    For Ruby, the compiler generates a .rb file with a Ruby module containing your message types.
+    For Objective-C, the compiler generates a pbobjc.h and pbobjc.m file from each .proto, with a class for each message type described in your file.
+    For C#, the compiler generates a .cs file from each .proto, with a class for each message type described in your file.
+    For Dart, the compiler generates a .pb.dart file with a class for each message type in your file.
+
+You can find out more about using the APIs for each language by following the tutorial for your chosen language (proto3 versions coming soon). For even more API details, see the relevant API reference (proto3 versions also coming soon).
