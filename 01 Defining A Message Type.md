@@ -20,11 +20,11 @@ message SearchRequest {
 
 - The first line of the file specifies that you're using proto3 syntax: if you don't do this the protocol buffer compiler will assume you are using proto2. This must be the first non-empty, non-comment line of the file.
 
-- 文件中第一行指明了你正在使用 proto3 的句法：如果你不这样做，protocol buffer 编译器会假定你正在使用 proto2。文件的第一行，必须是这样的——既不能为空，也不能注释掉。
+- 文件中第一行指明了你正在使用 proto3 的句法：如果你不这样做，protocol buffer 编译器会假定你正在使用 [proto2](https://developers.google.com/protocol-buffers/docs/proto)。文件的第一行，必须是这样的——既不能为空，也不能注释掉。
 
 - The SearchRequest message definition specifies three fields (name/value pairs), one for each piece of data that you want to include in this type of message. Each field has a name and a type.
 
-- SearchRequest 的消息定义指定了三个字段（名称/数值对儿），你想包含在此消息类型中的每一块数据，都各有一个。每个字段都有一个名称和一个类型。
+- SearchRequest 的消息定义指定了三个字段（名称/数值对儿），你想要包含在此消息类型中的每一块数据，都各有一个字段。每个字段都有一个名称和一个类型。
 
 ## Specifying Field Types
 
@@ -32,7 +32,7 @@ message SearchRequest {
 
 In the above example, all the fields are scalar types: two integers (page_number and result_per_page) and a string (query). However, you can also specify composite types for your fields, including enumerations and other message types.
 
-在上面的例子中，所有字段都是标量类型：两个整数（page_number 和 result_per_page），以及一个字符串（query）。但是，你也可以为你的字段指定复合类型，包括枚举和其他消息类型。
+在上面的例子中，所有字段都是[标量类型](https://developers.google.com/protocol-buffers/docs/proto3#scalar)：两个整数（page_number 和 result_per_page），以及一个字符串（query）。但是，你也可以为你的字段指定复合类型，包括[枚举](https://developers.google.com/protocol-buffers/docs/proto3#enum)和其他消息类型。
 
 ## Assigning Field Numbers
 
@@ -40,11 +40,11 @@ In the above example, all the fields are scalar types: two integers (page_number
 
 As you can see, each field in the message definition has a unique number. These field numbers are used to identify your fields in the message binary format, and should not be changed once your message type is in use. Note that field numbers in the range 1 through 15 take one byte to encode, including the field number and the field's type (you can find out more about this in Protocol Buffer Encoding). Field numbers in the range 16 through 2047 take two bytes. So you should reserve the numbers 1 through 15 for very frequently occurring message elements. Remember to leave some room for frequently occurring elements that might be added in the future.
 
-就像你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在消息体的二进制形式中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 Protocol Buffer 编码中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的字段保留一些空间。
+就像你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在[消息体的二进制形式](https://developers.google.com/protocol-buffers/docs/encoding)中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#structure)中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的字段保留一些空间。
 
 The smallest field number you can specify is 1, and the largest is 229 - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
 
-你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（FieldDescriptor::kFirstReservedNumber 到 FieldDescriptor::kLastReservedNumber），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会不高兴了。同样地，你不能使用任何之前已经保留的字段编号。
+你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会不高兴了。同样地，你不能使用任何之前已经保留的字段编号。
 
 
 ## Specifying Field Rules
@@ -56,15 +56,27 @@ Message fields can be one of the following:
 消息字段可以是下面所列中的某一类：
 
 - singular: a well-formed message can have zero or one of this field (but not more than one). And this is the default field rule for proto3 syntax.
+- singular：格式正确的消息可以不需要此字段，或拥有一个此字段（但同样的字段不能超过一个）。这也是 proto3 句法的默认字段规则。
 - `repeated`: this field can be repeated any number of times (including zero) in a well-formed message. The order of the repeated values will be preserved.
+- `repeated`：在格式正确的消息中，此字段可重复任意次数（包括〇次）。重复的值的序列会被保持。
 
 In proto3, repeated fields of scalar numeric types use packed encoding by default.
 
-You can find out more about packed encoding in Protocol Buffer Encoding.
-Adding More Message Types
+在 proto3 中，标量数值类型的 `repeated` 字段默认使用`分组`编码（`packed` encoding）。
+
+You can find out more about `packed` encoding in Protocol Buffer Encoding.
+
+有关`分组`编码，你可以在 [Protocol Buffer Encoding](https://developers.google.com/protocol-buffers/docs/encoding#packed) 中查看到更多信息。
+
+## Adding More Message Types
+
+## 添加更多消息类型
 
 Multiple message types can be defined in a single .proto file. This is useful if you are defining multiple related messages – so, for example, if you wanted to define the reply message format that corresponds to your SearchResponse message type, you could add it to the same .proto:
 
+在单个的 .proto 文件中，可以定义多个消息类型。如果你正在定义多个相关的消息，这就有用了——那么，举例来说，如果你想要定义与你的 SearchRequest 消息类型对应的回复消息形式，你可以在同一个 .proto 文件中直接添加它：
+
+```proto
 message SearchRequest {
   string query = 1;
   int32 page_number = 2;
@@ -74,13 +86,22 @@ message SearchRequest {
 message SearchResponse {
  ...
 }
+```
 
-Adding Comments
+## Adding Comments
+## 添加注释
 
 To add comments to your .proto files, use C/C++-style // and /* ... */ syntax.
 
+如果要往你的 .proto 文件中添加注释，使用 C/C++ 风格的 // 和 /* ... */ 句法。
+
+```proto
+
 /* SearchRequest represents a search query, with pagination options to
  * indicate which results to include in the response. */
+
+/* SearchRequest 表示一个搜索请求，附带有标页码选项，
+ * 来标示在响应中要包括哪些结果。*/
 
 message SearchRequest {
   string query = 1;
@@ -88,7 +109,11 @@ message SearchRequest {
   int32 result_per_page = 3;  // Number of results to return per page.
 }
 
-Reserved Fields
+```
+
+## Reserved Fields
+
+## 保留字段
 
 If you update a message type by entirely removing a field, or commenting it out, future users can reuse the field number when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the field numbers (and/or names, which can also cause issues for JSON serialization) of your deleted fields are reserved. The protocol buffer compiler will complain if any future users try to use these field identifiers.
 
