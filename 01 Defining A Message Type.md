@@ -1,8 +1,7 @@
-# 01 Defining A Message Type
 
-## Defining A Message Type
+# Defining A Message Type
 
-## 定义消息类型
+# 定义消息类型
 
 First let's look at a very simple example. Let's say you want to define a search request message format, where each search request has a query string, the particular page of results you are interested in, and a number of results per page. Here's the .proto file you use to define the message type.
 
@@ -44,7 +43,7 @@ As you can see, each field in the message definition has a unique number. These 
 
 The smallest field number you can specify is 1, and the largest is 229 - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
 
-你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会不高兴了。同样地，你不能使用任何之前已经保留的字段编号。
+你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了这些保留的编号的某一个，protocol buffer 编译器就会报错。同样地，你不能使用任何之前已经保留的字段编号。
 
 
 ## Specifying Field Rules
@@ -117,23 +116,36 @@ message SearchRequest {
 
 If you update a message type by entirely removing a field, or commenting it out, future users can reuse the field number when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the field numbers (and/or names, which can also cause issues for JSON serialization) of your deleted fields are reserved. The protocol buffer compiler will complain if any future users try to use these field identifiers.
 
+如果你通过整个地移除或注释掉一个字段，来更新一个消息类型，将来的用户在对这个类型进行他们自己的更新时，就可以再次使用这个字段的编号。假如他们随后加载了同样的、旧版本的 .proto 文件，就可能会导致严重的问题，包括：数据损坏，隐私漏洞等等。能够确保不会发生这种严重问题的一个办法是：把你删除的字段的字段编号（和/或名称——可能也会在 JSON 序列化时导致一些问题）指定为保留的。任何将来的用户如果尝试使用这些字段的标识符，protocol buffer 编译器就会报错。
+
+```proto
 message Foo {
   reserved 2, 15, 9 to 11;
   reserved "foo", "bar";
 }
 
+```
+
 Note that you can't mix field names and field numbers in the same reserved statement.
-What's Generated From Your .proto?
+
+请注意，在同一个保留语句中，你不能混合字段名称和字段编号。
+
+## What's Generated From Your .proto?
+## 你的 .proto 生成了什么？
 
 When you run the protocol buffer compiler on a .proto, the compiler generates the code in your chosen language you'll need to work with the message types you've described in the file, including getting and setting field values, serializing your messages to an output stream, and parsing your messages from an input stream.
 
-    For C++, the compiler generates a .h and .cc file from each .proto, with a class for each message type described in your file.
-    For Java, the compiler generates a .java file with a class for each message type, as well as a special Builder classes for creating message class instances.
-    Python is a little different – the Python compiler generates a module with a static descriptor of each message type in your .proto, which is then used with a metaclass to create the necessary Python data access class at runtime.
-    For Go, the compiler generates a .pb.go file with a type for each message type in your file.
-    For Ruby, the compiler generates a .rb file with a Ruby module containing your message types.
-    For Objective-C, the compiler generates a pbobjc.h and pbobjc.m file from each .proto, with a class for each message type described in your file.
-    For C#, the compiler generates a .cs file from each .proto, with a class for each message type described in your file.
-    For Dart, the compiler generates a .pb.dart file with a class for each message type in your file.
+当你在一个 .proto 文件上运行 protocol buffer 编译器时，编译器会生成你所选择的语言的代码，
+
+
+
+For C++, the compiler generates a .h and .cc file from each .proto, with a class for each message type described in your file.
+For Java, the compiler generates a .java file with a class for each message type, as well as a special Builder classes for creating message class instances.
+Python is a little different – the Python compiler generates a module with a static descriptor of each message type in your .proto, which is then used with a metaclass to create the necessary Python data access class at runtime.
+For Go, the compiler generates a .pb.go file with a type for each message type in your file.
+For Ruby, the compiler generates a .rb file with a Ruby module containing your message types.
+For Objective-C, the compiler generates a pbobjc.h and pbobjc.m file from each .proto, with a class for each message type described in your file.
+For C#, the compiler generates a .cs file from each .proto, with a class for each message type described in your file.
+For Dart, the compiler generates a .pb.dart file with a class for each message type in your file.
 
 You can find out more about using the APIs for each language by following the tutorial for your chosen language (proto3 versions coming soon). For even more API details, see the relevant API reference (proto3 versions also coming soon).
