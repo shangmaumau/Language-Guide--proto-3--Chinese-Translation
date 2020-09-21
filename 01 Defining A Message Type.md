@@ -19,7 +19,7 @@ message SearchRequest {
 
 - The first line of the file specifies that you're using proto3 syntax: if you don't do this the protocol buffer compiler will assume you are using proto2. This must be the first non-empty, non-comment line of the file.
 
-- 文件中第一行指明了你正在使用 proto3 的句法：如果你不这样做，protocol buffer 编译器会假定你正在使用 [proto2](https://developers.google.com/protocol-buffers/docs/proto)。文件的第一行，必须是这样的——既不能为空，也不能注释掉。
+- 文件中第一行指明了你正在使用 proto3 的句法：如果你不这么做，protocol buffer 编译器就会假定你正在使用 [proto2](https://developers.google.com/protocol-buffers/docs/proto)。文件的第一行，必须是这样的——既不能为空，也不能注释掉。
 
 - The SearchRequest message definition specifies three fields (name/value pairs), one for each piece of data that you want to include in this type of message. Each field has a name and a type.
 
@@ -88,6 +88,7 @@ message SearchResponse {
 ```
 
 ## Adding Comments
+
 ## 添加注释
 
 To add comments to your .proto files, use C/C++-style // and /* ... */ syntax.
@@ -116,7 +117,7 @@ message SearchRequest {
 
 If you update a message type by entirely removing a field, or commenting it out, future users can reuse the field number when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the field numbers (and/or names, which can also cause issues for JSON serialization) of your deleted fields are reserved. The protocol buffer compiler will complain if any future users try to use these field identifiers.
 
-如果你通过整个地移除或注释掉一个字段，来更新一个消息类型，将来的用户在对这个类型进行他们自己的更新时，就可以再次使用这个字段的编号。假如他们随后加载了同样的、旧版本的 .proto 文件，就可能会导致严重的问题，包括：数据损坏，隐私漏洞等等。能够确保不会发生这种严重问题的一个办法是：把你删除的字段的字段编号（和/或名称——可能也会在 JSON 序列化时导致一些问题）指定为保留的。任何将来的用户如果尝试使用这些字段的标识符，protocol buffer 编译器就会报错。
+如果你通过整个地移除或注释掉一个字段，来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个消息类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这个字段的编号。假如他们随后加载了同样的、旧版本的 .proto 文件，就可能会导致严重的问题，包括：数据损坏，隐私漏洞等等。能够确保不会发生这种严重问题的一个办法是：把你删除的字段的字段编号（和/或名称——可能也会在 JSON 序列化时导致一些问题）指定为保留的。任何未来的用户如果尝试使用这些字段的标识符，protocol buffer 编译器就会报错。
 
 ```proto
 message Foo {
@@ -131,21 +132,45 @@ Note that you can't mix field names and field numbers in the same reserved state
 请注意，在同一个保留语句中，你不能混合字段名称和字段编号。
 
 ## What's Generated From Your .proto?
+
 ## 你的 .proto 生成了什么？
 
 When you run the protocol buffer compiler on a .proto, the compiler generates the code in your chosen language you'll need to work with the message types you've described in the file, including getting and setting field values, serializing your messages to an output stream, and parsing your messages from an input stream.
 
-当你在一个 .proto 文件上运行 protocol buffer 编译器时，编译器会生成你所选择的语言的代码，
-
-
+当你在一个 .proto 文件上运行 [protocol buffer 编译器](https://developers.google.com/protocol-buffers/docs/proto3#generating)时，编译器会用你在文件中描述的消息类型，生成你所选择的工作要用到的语言的代码，包括获取和设置字段值，序列化你的消息到一个输出流，以及从一个输入流解析你的消息。
 
 For C++, the compiler generates a .h and .cc file from each .proto, with a class for each message type described in your file.
+
+对于 C++，编译器由每个 .proto 文件生成一个 .h 和 .cc 文件，你的文件中描述的每个消息类型，都有一个与之对应的类。
+
 For Java, the compiler generates a .java file with a class for each message type, as well as a special Builder classes for creating message class instances.
+
+对于 Java，编译器生成一个 .java 文件，每个消息类型对应一个类，还有一个特殊的构建类来创建消息类的实例对象。
+
 Python is a little different – the Python compiler generates a module with a static descriptor of each message type in your .proto, which is then used with a metaclass to create the necessary Python data access class at runtime.
+
+Python 则有一点不同——Python 编译器由你的 .proto 文件生成一个模块，.proto 文件中的每个消息类型在模块里都有一个与之对应的静态描述器。接着这个模块和一个元类一起使用，以在运行时创建必要的 Python 数据访问类。
+
 For Go, the compiler generates a .pb.go file with a type for each message type in your file.
+
+对于 Go，编译器生成一个 .pb.go 文件，你的文件中的每个消息类型在其中都有一个与之对应的类型。
+
 For Ruby, the compiler generates a .rb file with a Ruby module containing your message types.
+
+对于 Ruby，编译器生成一个 .rb 文件，其中的 Ruby 模块包含了你所有的消息类型。
+
 For Objective-C, the compiler generates a pbobjc.h and pbobjc.m file from each .proto, with a class for each message type described in your file.
+
+对于 Objective-C，编译器由每个 .proto 文件生成一个 pbobjc.h 和 pbobjc.m 文件，你的文件中的每个消息类型，都有一个与之对应的类。
+
 For C#, the compiler generates a .cs file from each .proto, with a class for each message type described in your file.
+
+对于 C#，编译器由每个 .proto 文件生成一个 .cs 文件，你的文件中描述的每个消息类型，都有一个与之对应的类。
+
 For Dart, the compiler generates a .pb.dart file with a class for each message type in your file.
 
+对于 Dart，编译器生成一个 .pb.dart 文件，你的文件中的每个消息类型，在其中都有一个与之对应的类。
+
 You can find out more about using the APIs for each language by following the tutorial for your chosen language (proto3 versions coming soon). For even more API details, see the relevant API reference (proto3 versions also coming soon).
+
+关于每种语言如何使用 API 的更多信息，你可以在相应语言版本的教程中找到（proto3 的版本将很快到来）。如果是更多 API 的细节，则请查看相关的 [API 参考](https://developers.google.com/protocol-buffers/docs/reference/overview)（proto3 的版本也将很快到来）。
