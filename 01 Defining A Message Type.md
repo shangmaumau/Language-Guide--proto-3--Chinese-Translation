@@ -23,7 +23,7 @@ message SearchRequest {
 
 - The SearchRequest message definition specifies three fields (name/value pairs), one for each piece of data that you want to include in this type of message. Each field has a name and a type.
 
-- SearchRequest 的消息定义指定了三个字段（名称/数值对儿），你想要包含在此消息类型中的每一块数据，都各有一个字段。每个字段都有一个名称和一个类型。
+- SearchRequest 的消息定义指定了三个字段（名称/数值对儿），每一块你想要包含在此消息类型中的数据，都各有一个字段。每个字段都有一个名称和一个类型。
 
 ## Specifying Field Types
 
@@ -39,7 +39,7 @@ In the above example, all the fields are scalar types: two integers (page_number
 
 As you can see, each field in the message definition has a unique number. These field numbers are used to identify your fields in the message binary format, and should not be changed once your message type is in use. Note that field numbers in the range 1 through 15 take one byte to encode, including the field number and the field's type (you can find out more about this in Protocol Buffer Encoding). Field numbers in the range 16 through 2047 take two bytes. So you should reserve the numbers 1 through 15 for very frequently occurring message elements. Remember to leave some room for frequently occurring elements that might be added in the future.
 
-就像你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在[消息体的二进制形式](https://developers.google.com/protocol-buffers/docs/encoding)中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#structure)中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的字段保留一些空间。
+正如你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在[消息体的二进制形式](https://developers.google.com/protocol-buffers/docs/encoding)中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#structure)中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的消息元素保留一些空间。
 
 The smallest field number you can specify is 1, and the largest is $2^{29}$ - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
 
