@@ -5,7 +5,7 @@
 
 First let's look at a very simple example. Let's say you want to define a search request message format, where each search request has a query string, the particular page of results you are interested in, and a number of results per page. Here's the .proto file you use to define the message type.
 
-首先让我们看一个非常简单的例子。比方说你想要定义一个搜索请求的消息形式，每个搜索请求都有一个查询字符串，你感兴趣的结果所在的特定的页，以及每页多少个结果的一个数字。这里就是你用来定义消息类型的 .proto 文件。
+首先让我们看一个非常简单的例子。比方说你想要定义一个搜索请求的消息形式，每个搜索请求都有一个查询字符串，你感兴趣的结果所在的特定的页，以及每页多少个结果的一个数字。这里就是你用来定义消息类型的 .proto 文件。
 
 ```proto
 syntax = "proto3";
@@ -39,7 +39,7 @@ In the above example, all the fields are scalar types: two integers (page_number
 
 As you can see, each field in the message definition has a unique number. These field numbers are used to identify your fields in the message binary format, and should not be changed once your message type is in use. Note that field numbers in the range 1 through 15 take one byte to encode, including the field number and the field's type (you can find out more about this in Protocol Buffer Encoding). Field numbers in the range 16 through 2047 take two bytes. So you should reserve the numbers 1 through 15 for very frequently occurring message elements. Remember to leave some room for frequently occurring elements that might be added in the future.
 
-就像你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在[消息体的二进制形式](https://developers.google.com/protocol-buffers/docs/encoding)中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#structure)中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的字段保留一些空间。
+就像你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在[消息体的二进制形式](https://developers.google.com/protocol-buffers/docs/encoding)中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#structure)中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的字段保留一些空间。
 
 The smallest field number you can specify is 1, and the largest is 229 - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
 
@@ -65,7 +65,7 @@ In proto3, repeated fields of scalar numeric types use packed encoding by defaul
 
 You can find out more about `packed` encoding in Protocol Buffer Encoding.
 
-有关`分组`编码，你可以在 [Protocol Buffer Encoding](https://developers.google.com/protocol-buffers/docs/encoding#packed) 中查看到更多信息。
+有关`分组`编码，你可以在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#packed) 中查看到更多信息。
 
 ## Adding More Message Types
 
@@ -73,7 +73,7 @@ You can find out more about `packed` encoding in Protocol Buffer Encoding.
 
 Multiple message types can be defined in a single .proto file. This is useful if you are defining multiple related messages – so, for example, if you wanted to define the reply message format that corresponds to your SearchResponse message type, you could add it to the same .proto:
 
-在单个的 .proto 文件中，可以定义多个消息类型。如果你正在定义多个相关的消息，这就有用了——那么，举例来说，如果你想要定义与你的 SearchRequest 消息类型对应的回复消息形式，你可以在同一个 .proto 文件中直接添加它：
+在单个的 .proto 文件中，可以定义多个消息类型。如果你正在定义多个相关的消息，这就有用了——那么，举例来说，如果你想要定义与你的 SearchRequest 消息类型对应的回复消息形式，你可以将它添加进同一个 .proto 文件中：
 
 ```proto
 message SearchRequest {
@@ -93,7 +93,7 @@ message SearchResponse {
 
 To add comments to your .proto files, use C/C++-style // and /* ... */ syntax.
 
-如果要往你的 .proto 文件中添加注释，使用 C/C++ 风格的 // 和 /* ... */ 句法。
+如果要往你的 .proto 文件中添加注释，请使用 C/C++ 风格的 // 和 /* ... */ 句法。
 
 ```proto
 
@@ -101,7 +101,7 @@ To add comments to your .proto files, use C/C++-style // and /* ... */ syntax.
  * indicate which results to include in the response. */
 
 /* SearchRequest 表示一个搜索请求，附带有标页码选项，
- * 来标示在响应中要包括哪些结果。*/
+ * 来标示在响应中要包含哪些结果。*/
 
 message SearchRequest {
   string query = 1;
@@ -117,7 +117,7 @@ message SearchRequest {
 
 If you update a message type by entirely removing a field, or commenting it out, future users can reuse the field number when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the field numbers (and/or names, which can also cause issues for JSON serialization) of your deleted fields are reserved. The protocol buffer compiler will complain if any future users try to use these field identifiers.
 
-如果你通过整个地移除或注释掉一个字段，来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个消息类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这个字段的编号。假如他们随后加载了同样的、旧版本的 .proto 文件，就可能会导致严重的问题，包括：数据损坏，隐私漏洞等等。能够确保不会发生这种严重问题的一个办法是：把你删除的字段的字段编号（和/或名称——可能也会在 JSON 序列化时导致一些问题）指定为保留的。任何未来的用户如果尝试使用这些字段的标识符，protocol buffer 编译器就会报错。
+如果你通过整个地移除或注释掉一个字段，来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个消息类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这个字段的编号。假如他们随后加载了同样的、旧版本的 .proto 文件，就可能会导致严重的问题，包括：数据损坏，隐私漏洞等等。能够确保这类严重问题不会发生的一个办法是：把你删除的字段的字段编号（和/或名称——可能也会在 JSON 序列化时导致一些问题）指定为保留的。任何未来的用户如果尝试使用这些字段的标识符，protocol buffer 编译器就会报错。
 
 ```proto
 message Foo {
@@ -137,7 +137,7 @@ Note that you can't mix field names and field numbers in the same reserved state
 
 When you run the protocol buffer compiler on a .proto, the compiler generates the code in your chosen language you'll need to work with the message types you've described in the file, including getting and setting field values, serializing your messages to an output stream, and parsing your messages from an input stream.
 
-当你在一个 .proto 文件上运行 [protocol buffer 编译器](https://developers.google.com/protocol-buffers/docs/proto3#generating)时，编译器会用你在文件中描述的消息类型，生成你所选择的工作要用到的语言的代码，包括获取和设置字段值，序列化你的消息到一个输出流，以及从一个输入流解析你的消息。
+当你在一个 .proto 文件上运行 [protocol buffer 编译器](https://developers.google.com/protocol-buffers/docs/proto3#generating)时，编译器会根据你在文件中描述的消息类型，生成你所选择的、工作要用到的语言的代码，包括获取和设置字段值，序列化你的消息到一个输出流，以及从一个输入流解析你的消息。
 
 For C++, the compiler generates a .h and .cc file from each .proto, with a class for each message type described in your file.
 
@@ -145,11 +145,11 @@ For C++, the compiler generates a .h and .cc file from each .proto, with a class
 
 For Java, the compiler generates a .java file with a class for each message type, as well as a special Builder classes for creating message class instances.
 
-对于 Java，编译器生成一个 .java 文件，每个消息类型对应一个类，还有一个特殊的构建类来创建消息类的实例对象。
+对于 Java，编译器生成一个 .java 文件，每个消息类型对应一个类，还有一个特殊的构建类用来创建消息类的实例对象。
 
 Python is a little different – the Python compiler generates a module with a static descriptor of each message type in your .proto, which is then used with a metaclass to create the necessary Python data access class at runtime.
 
-Python 则有一点不同——Python 编译器由你的 .proto 文件生成一个模块，.proto 文件中的每个消息类型在模块里都有一个与之对应的静态描述器。接着这个模块和一个元类一起使用，以在运行时创建必要的 Python 数据访问类。
+Python 则有一点不同——Python 编译器由你的 .proto 文件生成一个模块，.proto 文件中的每个消息类型在模块里都有一个与之对应的静态描述器。然后这个模块和一个元类一起使用，以在运行时创建必要的 Python 数据访问类。
 
 For Go, the compiler generates a .pb.go file with a type for each message type in your file.
 
