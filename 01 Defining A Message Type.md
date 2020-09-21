@@ -41,7 +41,7 @@ As you can see, each field in the message definition has a unique number. These 
 
 就像你看到的那样，消息定义中的每个字段都有一个唯一的编号。这些字段编号是用来在[消息体的二进制形式](https://developers.google.com/protocol-buffers/docs/encoding)中识别你的字段的，一旦你的消息类型使用起来了，这些编号就不该再改变。请注意，字段编号在 1-15 之间的，使用一个字节来编码，包括字段编号和字段的类型（有关这一点，在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#structure)中，你能查看到更多信息）。字段编号在 16-2047 之间的则使用两个字节。因此你应当为非常频繁出现的消息元素保留 1-15 的编号。记得给未来可能添加进来的、频繁出现的字段保留一些空间。
 
-The smallest field number you can specify is 1, and the largest is 229 - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
+The smallest field number you can specify is 1, and the largest is $$2^29$$ - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
 
 你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会报错。同样地，你不能使用任何之前已经保留的字段编号。
 
