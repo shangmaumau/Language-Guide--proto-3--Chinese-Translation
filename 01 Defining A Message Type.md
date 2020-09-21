@@ -43,7 +43,7 @@ As you can see, each field in the message definition has a unique number. These 
 
 The smallest field number you can specify is 1, and the largest is 229 - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
 
-你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了这些保留的编号的某一个，protocol buffer 编译器就会报错。同样地，你不能使用任何之前已经保留的字段编号。
+你能指定的最小的字段编号是 1，最大的是 229 - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会报错。同样地，你不能使用任何之前已经保留的字段编号。
 
 
 ## Specifying Field Rules
@@ -55,7 +55,7 @@ Message fields can be one of the following:
 消息字段可以是下面所列中的某一类：
 
 - singular: a well-formed message can have zero or one of this field (but not more than one). And this is the default field rule for proto3 syntax.
-- singular：格式正确的消息可以不需要此字段，或拥有一个此字段（但同样的字段不能超过一个）。这也是 proto3 句法的默认字段规则。
+- singular：格式正确的消息可以不需要此字段，或拥有一个此字段（但同样的字段不能超过一个）。这是 proto3 句法的默认字段规则。
 - `repeated`: this field can be repeated any number of times (including zero) in a well-formed message. The order of the repeated values will be preserved.
 - `repeated`：在格式正确的消息中，此字段可重复任意次数（包括〇次）。重复的值的序列会被保持。
 
@@ -73,7 +73,7 @@ You can find out more about `packed` encoding in Protocol Buffer Encoding.
 
 Multiple message types can be defined in a single .proto file. This is useful if you are defining multiple related messages – so, for example, if you wanted to define the reply message format that corresponds to your SearchResponse message type, you could add it to the same .proto:
 
-在单个的 .proto 文件中，可以定义多个消息类型。如果你正在定义多个相关的消息，这就有用了——那么，举例来说，如果你想要定义与你的 SearchRequest 消息类型对应的回复消息形式，你可以将它添加进同一个 .proto 文件中：
+在单个的 .proto 文件中，可以定义多个消息类型。如果你正在定义多个相关联的消息，这就有用了——那么，举例来说，如果你想要定义与你的 SearchRequest 消息类型对应的回复消息形式，你可以将它添加进同一个 .proto 文件中：
 
 ```proto
 message SearchRequest {
@@ -173,4 +173,4 @@ For Dart, the compiler generates a .pb.dart file with a class for each message t
 
 You can find out more about using the APIs for each language by following the tutorial for your chosen language (proto3 versions coming soon). For even more API details, see the relevant API reference (proto3 versions also coming soon).
 
-关于每种语言如何使用 API 的更多信息，你可以在相应语言版本的教程中找到（proto3 的版本将很快到来）。如果是更多 API 的细节，则请查看相关的 [API 参考](https://developers.google.com/protocol-buffers/docs/reference/overview)（proto3 的版本也将很快到来）。
+关于每种语言如何使用 API，你可以在相应语言版本的教程中找到（proto3 的版本将很快到来）更多信息。如果是更多 API 的细节，则请查看相关的 [API 参考](https://developers.google.com/protocol-buffers/docs/reference/overview)（proto3 的版本也将很快到来）。
