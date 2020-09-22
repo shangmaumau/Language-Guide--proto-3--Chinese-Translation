@@ -5,7 +5,7 @@
 
 When you're defining a message type, you might want one of its fields to only have one of a pre-defined list of values. For example, let's say you want to add a corpus field for each SearchRequest, where the corpus can be UNIVERSAL, WEB, IMAGES, LOCAL, NEWS, PRODUCTS or VIDEO. You can do this very simply by adding an enum to your message definition with a constant for each possible value.
 
-在你定义一个消息类型时，你可能想让它的某个字段，只能是一组预先定义好的值中的某一个。举个例子，比方说你想为每个 `SearchRequest` 添加一个 `corpus` 字段，这个 `corpus` 可以是 `UNIVERSAL`，`WEB`，`IMAGES`，`LOCAL`，`NEWS`，`PRODUCTS` 或 `VIDEO`。你可以通过向你的消息定义中添加一个`枚举`来很轻松地做到这点，枚举中的每个可能的值，都有一个常量与之对应。
+在你定义一个消息类型时，你可能想让它的某个字段，只能是一组预先定义好的值中的某一个。举个例子，比方说你想为每个 `SearchRequest` 添加一个 `corpus` 字段，这个 `corpus` 可以是 `UNIVERSAL`，`WEB`，`IMAGES`，`LOCAL`，`NEWS`，`PRODUCTS` 或 `VIDEO`。你可以通过向你的消息定义中添加一个`枚举`来很轻松地做到这点，`枚举`中的每个可能的值，都有一个常量与之对应。
 
 In the following example we've added an enum called Corpus with all the possible values, and a field of type Corpus:
 
@@ -32,7 +32,7 @@ message SearchRequest {
 
 As you can see, the Corpus enum's first constant maps to zero: every enum definition must contain a constant that maps to zero as its first element. This is because:
 
-正如你看到的那样，`Corpus` 枚举的第一个常量映射到了〇：每个枚举定义必须包含一个映射到〇的常量以作为它的第一个元素。这是因为：
+正如你看到的那样，`Corpus` 枚举的第一个常量映射到了〇：每个枚举定义**必须**包含一个映射到〇的常量以作为它的第一个元素。这是因为：
 
 * There must be a zero value, so that we can use 0 as a numeric default value.
 
