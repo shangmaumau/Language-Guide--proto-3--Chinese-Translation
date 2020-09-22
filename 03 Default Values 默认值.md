@@ -1,12 +1,11 @@
-03 Default Values
 
-Default Values
-默认值
+# Default Values
+
+# 默认值
 
 When a message is parsed, if the encoded message does not contain a particular singular element, the corresponding field in the parsed object is set to the default value for that field. These defaults are type-specific:
 
-当一个消息被解析时，如果编码过的消息并不包含一个特别的 singular 元素，在解析后的对象中，对应的字段就会设为那个字段的默认值。这些默认值是依类型而异的：
-
+当一个消息被解析时，如果编码过的消息并不包含一个特别的 singular 元素，在解析后的对象中，对应的字段就会设为那个字段的默认值。这些默认值是因类型而异的：
 
 * For strings, the default value is the empty string.
 
