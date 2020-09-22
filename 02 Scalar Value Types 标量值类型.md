@@ -57,7 +57,7 @@ You can find out more about how these types are encoded when you serialize your 
 
 [3] 64-bit or unsigned 32-bit integers are always represented as long when decoded, but can be an int if an int is given when setting the field. In all cases, the value must fit in the type represented when set. See [2].
 
-[3] 在解码时，64 位或无符号 32 位整数总是由 long 来表示，但假如在设置这个字段的时候，给的是一个 int 类型的值，也可以是 int。在所有情形中，当设置时，值的类型必须符合其要表示的类型（按就是设置的值的类型，必须与生成的类中相应的字段的类型保持一致）。见第二条。
+[3] 在解码时，64 位或无符号 32 位整数总是由 long 来表示，但假如在设置这个字段的时候，给的是一个 int 类型的值，也可以是 int。在所有情形中，当设置字段值时，值的类型必须符合其要表示的类型（按就是设置的值的类型，必须与生成的类中相应的字段的类型保持一致）。见第二条。
 
 [4] Python strings are represented as unicode on decode but can be str if an ASCII string is given (this is subject to change).
 
