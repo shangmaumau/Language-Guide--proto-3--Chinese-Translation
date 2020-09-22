@@ -65,7 +65,7 @@ In proto3, repeated fields of scalar numeric types use packed encoding by defaul
 
 You can find out more about `packed` encoding in Protocol Buffer Encoding.
 
-有关`分组`编码，你可以在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#packed) 中查看到更多信息。
+有关`分组`编码，你可以在 [Protocol Buffer 编码](https://developers.google.com/protocol-buffers/docs/encoding#packed) 中查找到更多信息。
 
 ## Adding More Message Types
 
@@ -129,7 +129,7 @@ message Foo {
 
 Note that you can't mix field names and field numbers in the same reserved statement.
 
-请注意，在同一个保留语句中，你不能混合字段名称和字段编号。
+请注意，在同一个保留语句中，你不能混搭字段名称和字段编号。
 
 ## What's Generated From Your .proto?
 
@@ -173,4 +173,4 @@ For Dart, the compiler generates a .pb.dart file with a class for each message t
 
 You can find out more about using the APIs for each language by following the tutorial for your chosen language (proto3 versions coming soon). For even more API details, see the relevant API reference (proto3 versions also coming soon).
 
-关于每种语言如何使用 API，你可以在相应语言版本的教程中找到（proto3 的版本将很快到来）更多信息。如果是更多 API 的细节，则请查看相关的 [API 参考](https://developers.google.com/protocol-buffers/docs/reference/overview)（proto3 的版本也将很快到来）。
+关于每种语言如何使用 API，你可以在相应语言版本的教程中查找到（proto3 的版本将很快到来）更多信息。如果是更多 API 的细节，则请查看相关的 [API 参考](https://developers.google.com/protocol-buffers/docs/reference/overview)（proto3 的版本也将很快到来）。
