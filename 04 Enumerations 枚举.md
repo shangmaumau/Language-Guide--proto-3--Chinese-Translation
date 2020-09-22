@@ -5,11 +5,11 @@
 
 When you're defining a message type, you might want one of its fields to only have one of a pre-defined list of values. For example, let's say you want to add a corpus field for each SearchRequest, where the corpus can be UNIVERSAL, WEB, IMAGES, LOCAL, NEWS, PRODUCTS or VIDEO. You can do this very simply by adding an enum to your message definition with a constant for each possible value.
 
-在你定义一个消息类型时，你可能想让它的某个字段，只能是一组预先定义好的值中的某一个。举个例子，比方说你想为每个 SearchRequest 添加一个 corpus 字段，这个 corpus 可以是 UNIVERSAL，WEB，IMAGES，LOCAL，NEWS，PRODUCTS 或 VIDEO。你可以通过向你的消息定义中添加一个枚举来很轻松地做到这点，枚举中的每个可能的值，都有一个常量与之对应。
+在你定义一个消息类型时，你可能想让它的某个字段，只能是一组预先定义好的值中的某一个。举个例子，比方说你想为每个 `SearchRequest` 添加一个 `corpus` 字段，这个 `corpus` 可以是 `UNIVERSAL`，`WEB`，`IMAGES`，`LOCAL`，`NEWS`，`PRODUCTS` 或 `VIDEO`。你可以通过向你的消息定义中添加一个`枚举`来很轻松地做到这点，枚举中的每个可能的值，都有一个常量与之对应。
 
 In the following example we've added an enum called Corpus with all the possible values, and a field of type Corpus:
 
-在下面的示例中，我们已经添加了一个叫做 Corpus 的枚举——附带了它所有可能的值——，以及一个类型为 Corpus 的字段：
+在下面的示例中，我们已经添加了一个叫做 `Corpus` 的`枚举`——附带了它所有可能的值——，以及一个类型为 `Corpus` 的字段：
 
 ```
 message SearchRequest {
@@ -32,19 +32,19 @@ message SearchRequest {
 
 As you can see, the Corpus enum's first constant maps to zero: every enum definition must contain a constant that maps to zero as its first element. This is because:
 
-正如你看到的那样，Corpus 枚举的第一个常量映射到了〇：每个枚举定义必须包含一个映射到〇的常量以作为它的第一个元素。这是因为：
+正如你看到的那样，`Corpus` 枚举的第一个常量映射到了〇：每个枚举定义必须包含一个映射到〇的常量以作为它的第一个元素。这是因为：
 
 * There must be a zero value, so that we can use 0 as a numeric default value.
 
-* 必须有一个〇值，因而我们才可以使用 0 作为数值类型的默认值。
+* 必须有一个〇值，因而我们才可以使用 0 作为数字类型的[默认值](https://developers.google.com/protocol-buffers/docs/proto3#default)。
 
 * The zero value needs to be the first element, for compatibility with the proto2 semantics where the first enum value is always the default.
 
-* 〇值需要是第一个元素，以保证与 proto2 语法的兼容性——其第一个枚举的值总是默认值。
+* 〇值需要是第一个元素，以保证与 [proto2](https://developers.google.com/protocol-buffers/docs/proto) 语法的兼容性——其第一个枚举的值总是默认值。
 
 You can define aliases by assigning the same value to different enum constants. To do this you need to set the allow_alias option to true, otherwise the protocol compiler will generate an error message when aliases are found.
 
-通过将相同的值分配给不同的枚举常量，你就可以定义别名了。要做到这点，你需要设置 allow_alias 选项为 ture，否则当 protocol 编译器发现别名时，就会生成一条错误信息。
+通过将相同的值分配给不同的枚举常量，你就可以定义别名了。要做到这点，你需要设置 `allow_alias` 选项为 `ture`，否则当 protocol 编译器发现别名时，就会生成一条错误信息。
 
 ```proto
 message MyMessage1 {
@@ -68,7 +68,7 @@ message MyMessage2 {
 
 Enumerator constants must be in the range of a 32-bit integer. Since enum values use varint encoding on the wire, negative values are inefficient and thus not recommended. You can define enums within a message definition, as in the above example, or outside – these enums can be reused in any message definition in your .proto file. You can also use an enum type declared in one message as the type of a field in a different message, using the syntax `_MessageType_._EnumType_`.
 
-枚举常量必须在 32 位的整数范围之内。因为枚举值在通信线路上使用了[变长整型编码（varint encoding）](https://developers.google.com/protocol-buffers/docs/encoding)，而负值效率低，因此不推荐。你可以在一个消息定义的内部定义`枚举`，像上面的示例那样，或者外部——在你的 `.proto` 文件中，这些`枚举`可以在任一消息类型定义中重复使用。你也可以使用一个已经在某个消息中声明了的枚举类型，来作为不同的消息的某个字段的类型，用这个句法：`_MessageType_._EnumType_`。
+枚举常量必须在 32 位的整数范围之内。因为`枚举`值在通信线路上使用了[变长整型编码（varint encoding）](https://developers.google.com/protocol-buffers/docs/encoding)，而负值效率低，因此不推荐。你可以在一个消息定义的内部定义`枚举`，像上面的示例那样，或者外部——在你的 `.proto` 文件中，这些`枚举`可以在任一消息类型定义中重复使用。你也可以使用一个已经在某个消息中声明了的`枚举`类型，来作为不同的消息的某个字段的类型，用这个句法：`_MessageType_._EnumType_`。
 
 When you run the protocol buffer compiler on a .proto that uses an enum, the generated code will have a corresponding enum for Java or C++, a special EnumDescriptor class for Python that's used to create a set of symbolic constants with integer values in the runtime-generated class.
 
@@ -94,7 +94,7 @@ For more information about how to work with message enums in your applications, 
 
 If you update an enum type by entirely removing an enum entry, or commenting it out, future users can reuse the numeric value when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the numeric values (and/or names, which can also cause issues for JSON serialization) of your deleted entries are reserved. The protocol buffer compiler will complain if any future users try to use these identifiers. You can specify that your reserved numeric value range goes up to the maximum possible value using the max keyword.
 
-如果你通过完整地移除或注释一个枚举条目（entry）来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个枚举类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这些数字值。如果他们随后加载同样的、旧版本的 `.proto` 文件，就可能会导致严重的问题，包括数据损坏，隐私漏洞等等。一种可确保这类严重问题不会发生的方法是，指定你删除的条目的数字值（和/或名称——也会在 JSON 序列化时引起问题）为 `reserved`。任何未来的用户如果尝试使用这些标识符，protocol buffer 编译器就会报错。你可以使用 max 关键字来指定你的保留的数字值可上达的最大可能值的范围。
+如果你通过完整地移除或注释一个枚举条目（entry）来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个枚举类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这些数字值。如果他们随后加载同样的、旧版本的 `.proto` 文件，就可能会导致严重的问题，包括数据损坏，隐私漏洞等等。一种可确保这类严重问题不会发生的方法是，指定你删除的条目的数字值（和/或名称——也会在 JSON 序列化时引起问题）为 `reserved`。任何未来的用户如果尝试使用这些标识符，protocol buffer 编译器就会报错。你可以使用 `max` 关键字来指定你的保留的数字值可上达的最大可能值的范围。
 
 ```proto
 enum Foo {
