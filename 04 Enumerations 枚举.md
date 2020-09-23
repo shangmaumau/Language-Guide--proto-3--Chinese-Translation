@@ -80,7 +80,7 @@ When you run the protocol buffer compiler on a .proto that uses an enum, the gen
 
 During deserialization, unrecognized enum values will be preserved in the message, though how this is represented when the message is deserialized is language-dependent. In languages that support open enum types with values outside the range of specified symbols, such as C++ and Go, the unknown enum value is simply stored as its underlying integer representation. In languages with closed enum types such as Java, a case in the enum is used to represent an unrecognized value, and the underlying integer can be accessed with special accessors. In either case, if the message is serialized the unrecognized value will still be serialized with the message.
 
-在反序列化期间，不能识别的枚举值会被保存在消息中，尽管当消息被反序列化时，这些值会被如何呈现是因语言而异的。在支持开放型枚举类型的值可在指定符号范围之外的语言，像 C++ 和 Go 中，未知的枚举值只是按照其基本整数呈现（underlying integer representation）存储。而在闭合型枚举类型的语言像 Java 中，则会用枚举中的某个条目（case）来表示不能识别的值，并且其基本整数（underlying integer）可通过特殊的访问器来获取到。至于其他的情形，如果消息被序列化了，不能识别的值仍会同消息一起被序列化。
+在反序列化期间，不能识别的枚举值会被保存在消息中，但是这些值在消息被反序列化时会如何呈现，却是因语言而异的了。在支持开放型枚举类型的值可以在指定符号范围之外的语言，像 C++ 和 Go 中，未知的枚举值只是按照其基本整数呈现（underlying integer representation）来存储。而在闭合型枚举类型的语言像 Java 中，不能识别的值会使用枚举中的某个条目（case）来表示，并且其基本整数（underlying integer）可通过特殊的访问器来获取到。在其他的情形下，如果消息被序列化了，不能识别的值仍会同消息一起被序列化。
 
 
 For more information about how to work with message enums in your applications, see the generated code guide for your chosen language.
