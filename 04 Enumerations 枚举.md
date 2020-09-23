@@ -106,4 +106,4 @@ enum Foo {
 
 Note that you can't mix field names and numeric values in the same reserved statement.
 
-请注意，你不能在同一条 `reserved` 声明中混搭字段名称和数字值。
+请注意，在同一条 `reserved` 声明中，你不能混搭字段名称和数字值。
