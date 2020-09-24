@@ -76,7 +76,7 @@ When you run the protocol buffer compiler on a .proto that uses an enum, the gen
 
 **Caution:** the generated code may be subject to language-specific limitations on the number of enumerators (low thousands for one language). Please review the limitations for the languages you plan to use.
 
-**警告⚠️**：生成的代码可能取决于特定语言在枚举数量上的限制（少的话，一个语言只有上千个）。请评估你打算使用的语言的限制数量。
+**⚠️警告**：生成的代码可能取决于特定语言在枚举数量上的限制（一个语言少的话只有上千个）。请评估你打算使用的语言的限制数量。
 
 During deserialization, unrecognized enum values will be preserved in the message, though how this is represented when the message is deserialized is language-dependent. In languages that support open enum types with values outside the range of specified symbols, such as C++ and Go, the unknown enum value is simply stored as its underlying integer representation. In languages with closed enum types such as Java, a case in the enum is used to represent an unrecognized value, and the underlying integer can be accessed with special accessors. In either case, if the message is serialized the unrecognized value will still be serialized with the message.
 
