@@ -66,11 +66,11 @@ Here are a few of the most commonly used options:
 
 * `objc_class_prefix` (file option): Sets the Objective-C class prefix which is prepended to all Objective-C generated classes and enums from this .proto. There is no default. You should use prefixes that are between 3-5 uppercase characters as recommended by Apple. Note that all 2 letter prefixes are reserved by Apple.
 
-* `objc_class_prefix`（文件选项）：设置 Objective-C 类的前缀，此前缀会置于从这个 .proto 生成的所有 Objective-C 的类和枚举的前面。无默认前缀。你应当使用由 [Apple 推荐的](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW4) 3-5 位的大写字母。请注意，所有两位字母的前缀已由 Apple 保留使用权。
+* `objc_class_prefix`（文件选项）：设置 Objective-C 类的前缀，此前缀会置于从这个 .proto 生成的所有 Objective-C 的类和枚举的前面。无默认前缀。你应当使用由 [Apple 推荐的](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW4) 3-5 位的大写字母。请注意，所有两位字母的前缀已由 Apple 保留（使用权）。
 
 * `deprecated` (field option): If set to `true`, indicates that the field is deprecated and should not be used by new code. In most languages this has no actual effect. In Java, this becomes a @Deprecated annotation. In the future, other language-specific code generators may generate deprecation annotations on the field's accessors, which will in turn cause a warning to be emitted when compiling code which attempts to use the field. If the field is not used by anyone and you want to prevent new users from using it, consider replacing the field declaration with a reserved statement.
 
-* `deprecated`（字段选项）：如设为 `true`，则表明本字段已弃用（deprecated），并且新代码不该再使用了。在大多数语言中，这个选项没有实际的作用。在 Java 中，它会变成一个 `@Deprecated` 的注释。未来，其他的、特定语言的代码生成器可能会在这个字段的访问器处生成弃用注释，这样，在编译试图使用这个字段的代码时，反而会使编译器弹出来一条警告。如果这个字段没有人用了，而且你想阻止新的用户使用它，考虑用一条[保留](https://developers.google.com/protocol-buffers/docs/proto3#reserved)语句来替代字段的声明。
+* `deprecated`（字段选项）：如设为 `true`，则表明本字段已弃用（deprecated），并且新代码不该再使用了。在大多数语言中，这个选项没有实际的作用。在 Java 中，它会变成一个 `@Deprecated` 的注释。未来，其他的、特定语言的代码生成器可能会在这个字段的访问器处生成弃用注释，这样，在编译试图使用这个字段的代码时，反而会使编译器弹出来一条警告。如果这个字段没有人用了，而且你想阻止新的用户使用它，考虑用一条[保留](https://developers.google.com/protocol-buffers/docs/proto3#reserved)语句来替换字段的声明。
 
     ```proto
     int32 old_field = 6 [deprecated = true];
