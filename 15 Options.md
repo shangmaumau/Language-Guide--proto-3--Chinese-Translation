@@ -5,13 +5,15 @@
 
 Individual declarations in a .proto file can be annotated with a number of options. Options do not change the overall meaning of a declaration, but may affect the way it is handled in a particular context. The complete list of available options is defined in google/protobuf/descriptor.proto.
 
-在 `.proto` 文件中，单独的声明可添加若干选项。选项并不改变声明的整体含义，但可能会影响它在特定的上下文中被处理的方式。完整的可用选项列表定义在 google/protobuf/descriptor.proto 中。
+在 `.proto` 文件中，单独的声明可添加若干选项。选项并不改变声明的整体含义，但可能会影响它在特定的上下文中被处理的方式。完整的可用选项列表定义在 `google/protobuf/descriptor.proto` 中（按文件位置已在 3.12.0 中更改为相应语言版本根目录中的 `GPBDescriptor` 中）。
 
 Some options are file-level options, meaning they should be written at the top-level scope, not inside any message, enum, or service definition. Some options are message-level options, meaning they should be written inside message definitions. Some options are field-level options, meaning they should be written inside field definitions. Options can also be written on enum types, enum values, oneof fields, service types, and service methods; however, no useful options currently exist for any of these.
 
-一些选项是文件级（file-level）的选项，意味着它们应当被编写在最顶层的作用域中，而不是任一消息，枚举，或服务定义的内部。一些选项是消息级（message-level）的选项，意味着它们应当被编写在消息定义的内部。一些选项是字段级（field-level）的选项，意味着它们应当被编写在字段定义的内部。选项也可以被编写在枚举类型，枚举值，oneof 字段，服务类型，以及服务方法上；然而，对于这几个（论及到的）中的任何一个而言，当前并没有有用的选项存在。
+一些选项是文件级（file-level）的选项，意味着它们应当被编写在最顶层的作用域中，而不是任一消息，枚举，或服务定义的内部。一些选项是消息级（message-level）的选项，意味着它们应当被编写在消息定义的内部。一些选项是字段级（field-level）的选项，意味着它们应当被编写在字段定义的内部。选项也可以被编写在枚举类型，枚举值，oneof 字段，服务类型，以及服务方法上；然而，对于（论及到的）这几个中的任何一个而言，目前并不存在有用的选项。
 
 Here are a few of the most commonly used options:
+
+这里是一些最常用到的选项：
 
 * `java_package` (file option): The package you want to use for your generated Java classes. If no explicit `java_package` option is given in the `.proto` file, then by default the proto package (specified using the "package" keyword in the .proto file) will be used. However, proto packages generally do not make good Java packages since proto packages are not expected to start with reverse domain names. If not generating Java code, this option has no effect.
 
@@ -64,11 +66,11 @@ Here are a few of the most commonly used options:
 
 * `objc_class_prefix` (file option): Sets the Objective-C class prefix which is prepended to all Objective-C generated classes and enums from this .proto. There is no default. You should use prefixes that are between 3-5 uppercase characters as recommended by Apple. Note that all 2 letter prefixes are reserved by Apple.
 
-* `objc_class_prefix`（文件选项）：设置 Objective-C 类的前缀，此前缀会置于从这个 .proto 生成的所有 Objective-C 的类和枚举的前面。无默认前缀。你应当使用由 Apple 推荐的 3-5 位的大写字母。请注意，所有两位字母的前缀已由 Apple 保留使用权。
+* `objc_class_prefix`（文件选项）：设置 Objective-C 类的前缀，此前缀会置于从这个 .proto 生成的所有 Objective-C 的类和枚举的前面。无默认前缀。你应当使用由 [Apple 推荐的](https://developer.apple.com/library/ios/documentation/Cocoa/Conceptual/ProgrammingWithObjectiveC/Conventions/Conventions.html#//apple_ref/doc/uid/TP40011210-CH10-SW4) 3-5 位的大写字母。请注意，所有两位字母的前缀已由 Apple 保留使用权。
 
 * `deprecated` (field option): If set to `true`, indicates that the field is deprecated and should not be used by new code. In most languages this has no actual effect. In Java, this becomes a @Deprecated annotation. In the future, other language-specific code generators may generate deprecation annotations on the field's accessors, which will in turn cause a warning to be emitted when compiling code which attempts to use the field. If the field is not used by anyone and you want to prevent new users from using it, consider replacing the field declaration with a reserved statement.
 
-* `deprecated`（字段选项）：如设为 `true`，则表明本字段已弃用（deprecated），并且新代码不该再使用了。在大多数语言中，这个选项没有实际的作用。在 Java 中，它会变成一个 `@Deprecated` 的注释。未来，其他的特定语言的代码生成器可能会在这个字段的获取器处生成弃用注释，这样，在编译试图使用这个字段的代码时，反而却会使编译器弹出来一条警告。
+* `deprecated`（字段选项）：如设为 `true`，则表明本字段已弃用（deprecated），并且新代码不该再使用了。在大多数语言中，这个选项没有实际的作用。在 Java 中，它会变成一个 `@Deprecated` 的注释。未来，其他的、特定语言的代码生成器可能会在这个字段的访问器处生成弃用注释，这样，在编译试图使用这个字段的代码时，反而会使编译器弹出来一条警告。如果这个字段没有人用了，而且你想阻止新的用户使用它，考虑用一条[保留](https://developers.google.com/protocol-buffers/docs/proto3#reserved)语句来替代字段的声明。
 
     ```proto
     int32 old_field = 6 [deprecated = true];
@@ -80,4 +82,4 @@ Here are a few of the most commonly used options:
 
 Protocol Buffers also allows you to define and use your own options. This is an advanced feature which most people don't need. If you do think you need to create your own options, see the Proto2 Language Guide for details. Note that creating custom options uses extensions, which are permitted only for custom options in proto3.
 
-Protocol Buffers 也允许你定义和使用你自己的选项。这是一个高阶功能——大多数人用不到。如果你确实认为你需要创建你自己的选项，请查看 Proto2 语言指南来获取更多细节。请注意，使用[扩展](https://developers.google.com/protocol-buffers/docs/proto#extensions)来创建自定义的选项——扩展只允许在 proto3 的自定义选项中使用。
+Protocol Buffers 也允许你定义和使用你自己的选项。这是一个**高阶功能**——大多数人用不到。如果你确实认为你需要创建你自己的选项，请查看 [Proto2 语言指南](https://developers.google.com/protocol-buffers/docs/proto#customoptions)来获取更多细节。注意，请使用[扩展](https://developers.google.com/protocol-buffers/docs/proto#extensions)来创建自定义选项——扩展只允许在 proto3 的自定义选项中使用。
