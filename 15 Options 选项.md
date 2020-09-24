@@ -5,7 +5,7 @@
 
 Individual declarations in a .proto file can be annotated with a number of options. Options do not change the overall meaning of a declaration, but may affect the way it is handled in a particular context. The complete list of available options is defined in google/protobuf/descriptor.proto.
 
-在 `.proto` 文件中，单独的声明可添加若干选项。选项并不改变声明的整体含义，但可能会影响它在特定的上下文中被处理的方式。完整的可用选项列表定义在 `google/protobuf/descriptor.proto` 中（按文件位置已在 3.12.0 中更改为相应语言版本根目录中的 `GPBDescriptor` 中）。
+在 `.proto` 文件中，单独的声明可添加若干选项。选项并不改变声明的整体含义，但可能会影响它在特定的上下文中被处理的方式。完整的可用选项列表定义在 `google/protobuf/descriptor.proto` 中（**按**文件位置已在 3.12.0 中更改为相应语言版本根目录中的 `GPBDescriptor` 中）。
 
 Some options are file-level options, meaning they should be written at the top-level scope, not inside any message, enum, or service definition. Some options are message-level options, meaning they should be written inside message definitions. Some options are field-level options, meaning they should be written inside field definitions. Options can also be written on enum types, enum values, oneof fields, service types, and service methods; however, no useful options currently exist for any of these.
 

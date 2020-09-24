@@ -117,7 +117,7 @@ message SearchRequest {
 
 If you update a message type by entirely removing a field, or commenting it out, future users can reuse the field number when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the field numbers (and/or names, which can also cause issues for JSON serialization) of your deleted fields are reserved. The protocol buffer compiler will complain if any future users try to use these field identifiers.
 
-如果你通过完整地移除或注释一个字段，来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个消息类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这个字段的编号。假如他们随后加载了同样的、旧版本的 `.proto` 文件，就可能会导致严重的问题，包括：数据损坏，隐私漏洞等等。能够确保这类严重问题不会发生的一个办法是，把你删除的字段的字段编号（和/或名称——可能也会在 JSON 序列化时导致一些问题）指定为 `reserved`（按即保留的）。任何未来的用户如果尝试使用这些字段的标识符，protocol buffer 编译器就会报错。
+如果你通过完整地移除或注释一个字段，来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个消息类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这个字段的编号。假如他们随后加载了同样的、旧版本的 `.proto` 文件，就可能会导致严重的问题，包括：数据损坏，隐私漏洞等等。能够确保这类严重问题不会发生的一个办法是，把你删除的字段的字段编号（和/或名称——可能也会在 JSON 序列化时导致一些问题）指定为 `reserved`（**按**即保留的）。任何未来的用户如果尝试使用这些字段的标识符，protocol buffer 编译器就会报错。
 
 ```proto
 message Foo {
