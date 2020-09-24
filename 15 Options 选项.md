@@ -17,7 +17,7 @@ Here are a few of the most commonly used options:
 
 * `java_package` (file option): The package you want to use for your generated Java classes. If no explicit `java_package` option is given in the `.proto` file, then by default the proto package (specified using the "package" keyword in the .proto file) will be used. However, proto packages generally do not make good Java packages since proto packages are not expected to start with reverse domain names. If not generating Java code, this option has no effect.
 
-* `java_package`（文件选项）：你想为你的生成的 Java 类而使用的包。如果在 `.proto` 文件中没有给定显式的 `java_package` 选项，那么默认就会使用 proto 包（在 .proto 文件中使用“package”关键字指定的）。然而，通常 proto 包并不能制作良好的 Java 包，因为 proto 包预期并不以反向域名开始。如果不生成 Java 代码，此选项没有任何效果。
+* `java_package`（文件选项）：你想为你的生成的 Java 类而使用的包。如果在 `.proto` 文件中没有给定显式的 `java_package` 选项，那么默认就会使用 proto 包（在 .proto 文件中使用“package”关键字指定的）。然而，通常 proto 包并不能制作良好的 Java 包，因为 proto 包预期并不以反向域名开始。如果不生成 Java 代码，此选项就没有作用。
 
     ```proto
     option java_package = "com.example.foo";
@@ -34,7 +34,7 @@ Here are a few of the most commonly used options:
 
 * `java_outer_classname` (file option): The class name for the outermost Java class (and hence the file name) you want to generate. If no explicit `java_outer_classname` is specified in the `.proto` file, the class name will be constructed by converting the `.proto` file name to camel-case (so `foo_bar.proto` becomes `FooBar.java`). If not generating Java code, this option has no effect.
 
-* `java_outer_classname`（文件选项）：你想生成的最外层的 Java 类（因此也是文件名）的类名。如果在 `.proto` 文件中没有给定显式的 `java_outer_classname` 选项，类名会通过将 `.proto` 文件名转换为驼峰命名的方式（所以 `foo_bar.proto` 会变成 `FooBar.java`）来构建。
+* `java_outer_classname`（文件选项）：你想生成的最外层的 Java 类（因此也是文件名）的类名。如果在 `.proto` 文件中没有给定显式的 `java_outer_classname` 选项，类名会通过将 `.proto` 文件名转换为驼峰命名的方式（所以 `foo_bar.proto` 变成了 `FooBar.java`）来构建。
 
     ```proto
     option java_outer_classname = "Ponycopter";
