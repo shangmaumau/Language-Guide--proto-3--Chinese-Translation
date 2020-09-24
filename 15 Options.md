@@ -1,10 +1,18 @@
 15 Options
 
-Options
+# Options
+
+# Options（选项） 
 
 Individual declarations in a .proto file can be annotated with a number of options. Options do not change the overall meaning of a declaration, but may affect the way it is handled in a particular context. The complete list of available options is defined in google/protobuf/descriptor.proto.
 
+在 .proto 文件中单独的声明可添加若干选项。选项并不改变声明的整体含义，但可能会影响它在特定的上下文中被处理的方式。完整的可用选项列表定义在 google/protobuf/descriptor.proto 中。
+
+be handled 翻成被处理还是被理解？
+
 Some options are file-level options, meaning they should be written at the top-level scope, not inside any message, enum, or service definition. Some options are message-level options, meaning they should be written inside message definitions. Some options are field-level options, meaning they should be written inside field definitions. Options can also be written on enum types, enum values, oneof fields, service types, and service methods; however, no useful options currently exist for any of these.
+
+一些选项是文件级（file-level）的选项，意味着它们应当被编写在最顶层的作用域中，而不是任一消息，枚举，或服务定义的内部。一些选项是消息级（message-level）的选项，意味着它们应当被编写在消息定义的内部。一些选项是字段级（field-level）的选项，意味着它们应当被编写在字段定义的内部。选项也可以被编写在枚举类型，枚举值，oneof 字段，服务类型，以及服务方法上；然而，对于这些（论及到的）中的任何一个而言，当前并没有有用的选项存在。
 
 Here are a few of the most commonly used options:
 
