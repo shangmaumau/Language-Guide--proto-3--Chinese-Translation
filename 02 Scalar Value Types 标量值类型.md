@@ -7,41 +7,41 @@ A scalar message field can have one of the following types – the table shows t
 
 一个标量消息字段可以是下述类型中的一个——下表展示了在 .proto 文件中指定的类型，以及在自动生成的类中相对应的类型：
 
-| .proto Type |	Notes |	C++ Type | Java Type | Python Type[2] | Go Type | Ruby Type | C# Type | PHP Type | Dart Type |
+| .proto Type |	Notes |	C++ Type | Java Type | Python Type<sup>[2]</sup> | Go Type | Ruby Type | C# Type | PHP Type | Dart Type |
 | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- |
 | double |  | double | double | float | float64 | Float | double | float | double |
 | float |  | float | float | float | float32 | Float | float | float | double | 
 | int32 | Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead. | int32 | int | int | int32 | Fixnum or Bignum (as required) | int | integer | int |
-| int64 | Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead. | int64 | long | int/long[3] | int64 | Bignum | long | integer/string[5] | Int64 |
-| uint32 | Uses variable-length encoding. | uint32 | int[1] | int/long[3] | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
-| uint64 | Uses variable-length encoding. | uint64 | long[1] | int/long[3] | uint64 | Bignum | ulong | integer/string[5] | Int64 |
+| int64 | Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead. | int64 | long | int/long<sup>[3]</sup> | int64 | Bignum | long | integer/string<sup>[5]</sup> | Int64 |
+| uint32 | Uses variable-length encoding. | uint32 | int<sup>[1]</sup> | int/long<sup>[3]</sup> | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
+| uint64 | Uses variable-length encoding. | uint64 | long<sup>[1]</sup> | int/long<sup>[3]</sup> | uint64 | Bignum | ulong | integer/string<sup>[5]</sup> | Int64 |
 | sint32 | Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s. | int32 | int | int | int32 | Fixnum or Bignum (as required) | int | integer | int |
-| sint64 | Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s. | int64 | long | int/long[3] | int64 | Bignum | long | integer/string[5] | Int64 |
-| fixed32 | Always four bytes. More efficient than uint32 if values are often greater than $2^{28}$. | uint32 | int[1] | int/long[3] | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
-| fixed64 | Always eight bytes. More efficient than uint64 if values are often greater than $2^{56}$. | uint64 | long[1] | int/long[3] | uint64 | Bignum | ulong | integer/string[5] | Int64 |
+| sint64 | Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s. | int64 | long | int/long<sup>[3]</sup> | int64 | Bignum | long | integer/string<sup>[5]</sup> | Int64 |
+| fixed32 | Always four bytes. More efficient than uint32 if values are often greater than 2<sup>28</sup>. | uint32 | int<sup>[1]</sup> | int/long<sup>[3]</sup> | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
+| fixed64 | Always eight bytes. More efficient than uint64 if values are often greater than 2<sup>56</sup>. | uint64 | long<sup>[1]</sup> | int/long<sup>[3]</sup> | uint64 | Bignum | ulong | integer/string<sup>[5]</sup> | Int64 |
 | sfixed32 | Always four bytes. | int32 | int | int | int32 | Fixnum or Bignum (as required) | int | integer | int |
-| sfixed64 | Always eight bytes. | int64 | long | int/long[3] | int64 | Bignum | long | integer/string[5] | Int64 |
+| sfixed64 | Always eight bytes. | int64 | long | int/long<sup>[3]</sup> | int64 | Bignum | long | integer/string<sup>[5]</sup> | Int64 |
 | bool |  | bool | boolean | bool | bool | TrueClass/FalseClass | bool | boolean | bool |
-| string | A string must always contain UTF-8 encoded or 7-bit ASCII text, and cannot be longer than $2^{32}$. | string | String | str/unicode[4] | string | String (UTF-8) | string | string | String |
-| bytes | May contain any arbitrary sequence of bytes no longer than $2^{32}$. | string | ByteString | str | []byte | String (ASCII-8BIT) | ByteString | string | List |
+| string | A string must always contain UTF-8 encoded or 7-bit ASCII text, and cannot be longer than 2<sup>32</sup>. | string | String | str/unicode<sup>[4]</sup> | string | String (UTF-8) | string | string | String |
+| bytes | May contain any arbitrary sequence of bytes no longer than 2<sup>32</sup>. | string | ByteString | str | []byte | String (ASCII-8BIT) | ByteString | string | List |
 
-| .proto Type |	Notes |	C++ Type | Java Type | Python Type[2] | Go Type | Ruby Type | C# Type | PHP Type | Dart Type |
+| .proto Type |	Notes |	C++ Type | Java Type | Python Type<sup>[2]</sup> | Go Type | Ruby Type | C# Type | PHP Type | Dart Type |
 | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- | :---------- |
 | double |  | double | double | float | float64 | Float | double | float | double |
 | float |  | float | float | float | float32 | Float | float | float | double | 
 | int32 | 使用变长编码。编码负数效率低——如果你的字段可能有负值，请换用 sint32。 | int32 | int | int | int32 | Fixnum or Bignum (as required) | int | integer | int |
-| int64 | 使用变长编码。编码负数效率低——如果你的字段可能有负值，请换用 sint64。 | int64 | long | int/long[3] | int64 | Bignum | long | integer/string[5] | Int64 |
-| uint32 | 使用变长编码。 | uint32 | int[1] | int/long[3] | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
-| uint64 | 使用变长编码。 | uint64 | long[1] | int/long[3] | uint64 | Bignum | ulong | integer/string[5] | Int64 |
+| int64 | 使用变长编码。编码负数效率低——如果你的字段可能有负值，请换用 sint64。 | int64 | long | int/long<sup>[3]</sup> | int64 | Bignum | long | integer/string<sup>[5]</sup> | Int64 |
+| uint32 | 使用变长编码。 | uint32 | int<sup>[1]</sup> | int/long<sup>[3]</sup> | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
+| uint64 | 使用变长编码。 | uint64 | long<sup>[1]</sup> | int/long<sup>[3]</sup> | uint64 | Bignum | ulong | integer/string<sup>[5]</sup> | Int64 |
 | sint32 | 使用变长编码。有符号的 int 值。编码负值时，比普通的 int32 类整数类型具有更高的效率。 | int32 | int | int | int32 | Fixnum or Bignum (as required) | int | integer | int |
-| sint64 | 使用变长编码。有符号的 int 值。编码负值时，比普通的 int64 类整数类型具有更高的效率。 | int64 | long | int/long[3] | int64 | Bignum | long | integer/string[5] | Int64 |
-| fixed32 | 恒为四个字节。如果值总是大于 $2^{28}$，则比 uint32 具有更高的效率。 | uint32 | int[1] | int/long[3] | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
-| fixed64 | 恒为八个字节。如果值总是大于 $2^{56}$，则比 uint64 具有更高的效率。 | uint64 | long[1] | int/long[3] | uint64 | Bignum | ulong | integer/string[5] | Int64 |
+| sint64 | 使用变长编码。有符号的 int 值。编码负值时，比普通的 int64 类整数类型具有更高的效率。 | int64 | long | int/long<sup>[3]</sup> | int64 | Bignum | long | integer/string<sup>[5]</sup> | Int64 |
+| fixed32 | 恒为四个字节。如果值总是大于 2<sup>28</sup>，则比 uint32 具有更高的效率。 | uint32 | int<sup>[1]</sup> | int/long<sup>[3]</sup> | uint32 | Fixnum or Bignum (as required) | uint | integer | int |
+| fixed64 | 恒为八个字节。如果值总是大于 2<sup>56</sup>，则比 uint64 具有更高的效率。 | uint64 | long<sup>[1]</sup> | int/long<sup>[3]</sup> | uint64 | Bignum | ulong | integer/string<sup>[5]</sup> | Int64 |
 | sfixed32 | 恒为四个字节。 | int32 | int | int | int32 | Fixnum or Bignum (as required) | int | integer | int |
-| sfixed64 | 恒为八个字节。 | int64 | long | int/long[3] | int64 | Bignum | long | integer/string[5] | Int64 |
+| sfixed64 | 恒为八个字节。 | int64 | long | int/long<sup>[3]</sup> | int64 | Bignum | long | integer/string<sup>[5]</sup> | Int64 |
 | bool |  | bool | boolean | bool | bool | TrueClass/FalseClass | bool | boolean | bool |
-| string | 字符串必须总是包含 UTF-8 编码的或七位的 ASCII 的文本，并且长度不能超过 $2^{32}$。| string | String | str/unicode[4] | string | String (UTF-8) | string | string | String |
-| bytes | 可能包含任何任意序列的字节码，其长度不能超过 $2^{32}$。 | string | ByteString | str | []byte | String (ASCII-8BIT) | ByteString | string | List |
+| string | 字符串必须总是包含 UTF-8 编码的或七位的 ASCII 的文本，并且长度不能超过 2<sup>32</sup>。| string | String | str/unicode<sup>[4]</sup> | string | String (UTF-8) | string | string | String |
+| bytes | 可能包含任何任意序列的字节码，其长度不能超过 2<sup>32</sup>。 | string | ByteString | str | []byte | String (ASCII-8BIT) | ByteString | string | List |
 
 You can find out more about how these types are encoded when you serialize your message in Protocol Buffer Encoding.
 
