@@ -25,7 +25,7 @@ When a message is parsed, if the encoded message does not contain a particular s
 
 * For enums, the default value is the first defined enum value, which must be 0.
 
-* 对[枚举类](https://developers.google.com/protocol-buffers/docs/proto3#enum)的，其默认值是**第一个定义的枚举的值**——必须为 0。
+* 对[枚举类](https://developers.google.com/protocol-buffers/docs/proto3#enum)的，其默认值是**第一个定义的枚举值**——必须为 0。
 
 * For message fields, the field is not set. Its exact value is language-dependent. See the generated code guide for details.
 
