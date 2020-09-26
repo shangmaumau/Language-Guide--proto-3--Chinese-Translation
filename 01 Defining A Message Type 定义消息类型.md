@@ -5,7 +5,7 @@
 
 First let's look at a very simple example. Let's say you want to define a search request message format, where each search request has a query string, the particular page of results you are interested in, and a number of results per page. Here's the .proto file you use to define the message type.
 
-首先让我们看一个非常简单的例子。比方说你想要定义一个搜索请求的消息形式，每个搜索请求都有一个查询字符串，你感兴趣的结果所在的特定的页，以及每页多少个结果的一个数字。这里就是你用来定义消息类型的 .proto 文件。
+首先让我们看一个非常简单的例子。比方说你想要定义一个搜索请求的消息形式，每个搜索请求都有一个查询字符串，你感兴趣的结果所在的特定的页，以及每页多少个结果的一个数字。这里就是你用来定义消息类型的 `.proto` 文件。
 
 ```proto
 syntax = "proto3";
@@ -19,11 +19,11 @@ message SearchRequest {
 
 - The first line of the file specifies that you're using proto3 syntax: if you don't do this the protocol buffer compiler will assume you are using proto2. This must be the first non-empty, non-comment line of the file.
 
-- 文件中第一行指明了你正在使用 proto3 的句法：如果你不这么做，protocol buffer 编译器就会假定你正在使用 [proto2](https://developers.google.com/protocol-buffers/docs/proto)。文件的第一行，必须是这样的——既不能为空，也不能注释掉。
+- 文件中第一行指明了你正在使用 `proto3` 句法：如果你不这么做，protocol buffer 编译器就会假定你正在使用 [proto2](https://developers.google.com/protocol-buffers/docs/proto)。文件的第一行，必须是这样的——既不能为空，也不能注释掉。
 
 - The SearchRequest message definition specifies three fields (name/value pairs), one for each piece of data that you want to include in this type of message. Each field has a name and a type.
 
-- SearchRequest 的消息定义指定了三个字段（名称/数值对儿），每一块你想要包含在此消息类型中的数据，都各有一个字段。每个字段都有一个名称和一个类型。
+- `SearchRequest` 的消息定义指定了三个字段（名称/数值对儿），每一块你想要包含在此消息类型中的数据，都各有一个字段。每个字段都有一个名称和一个类型。
 
 ## Specifying Field Types
 
@@ -31,7 +31,7 @@ message SearchRequest {
 
 In the above example, all the fields are scalar types: two integers (page_number and result_per_page) and a string (query). However, you can also specify composite types for your fields, including enumerations and other message types.
 
-在上面的例子中，所有字段都是[标量类型](https://developers.google.com/protocol-buffers/docs/proto3#scalar)：两个整数（page_number 和 result_per_page），以及一个字符串（query）。但是，你也可以为你的字段指定复合类型，包括[枚举](https://developers.google.com/protocol-buffers/docs/proto3#enum)和其他消息类型。
+在上面的例子中，所有字段都是[标量类型](https://developers.google.com/protocol-buffers/docs/proto3#scalar)：两个整数（`page_number` 和 `result_per_page`），以及一个字符串（query）。但是，你也可以为你的字段指定复合类型，包括[枚举](https://developers.google.com/protocol-buffers/docs/proto3#enum)和其他消息类型。
 
 ## Assigning Field Numbers
 
@@ -43,7 +43,7 @@ As you can see, each field in the message definition has a unique number. These 
 
 The smallest field number you can specify is 1, and the largest is 2<sup>29</sup> - 1, or 536,870,911. You also cannot use the numbers 19000 through 19999 (FieldDescriptor::kFirstReservedNumber through FieldDescriptor::kLastReservedNumber), as they are reserved for the Protocol Buffers implementation - the protocol buffer compiler will complain if you use one of these reserved numbers in your .proto. Similarly, you cannot use any previously reserved field numbers.
 
-你能指定的最小的字段编号是 1，最大的是 2<sup>29</sup> - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 .proto 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会报错。同样地，你不能使用任何之前已经保留的字段编号。
+你能指定的最小的字段编号是 1，最大的是 2<sup>29</sup> - 1，或 536,870,911。你也不能使用 19000-19999 之间的编号（`FieldDescriptor::kFirstReservedNumber` 到 `FieldDescriptor::kLastReservedNumber`），因为它们被保留用于 Protocol Buffers 的实现——如果你在你的 `.proto` 文件中使用了某一个这些保留的编号，protocol buffer 编译器就会报错。同样地，你不能使用任何之前已经[保留的](https://developers.google.com/protocol-buffers/docs/proto3#reserved)字段编号。
 
 
 ## Specifying Field Rules

@@ -68,7 +68,7 @@ message MyMessage2 {
 
 Enumerator constants must be in the range of a 32-bit integer. Since enum values use varint encoding on the wire, negative values are inefficient and thus not recommended. You can define enums within a message definition, as in the above example, or outside – these enums can be reused in any message definition in your .proto file. You can also use an enum type declared in one message as the type of a field in a different message, using the syntax `_MessageType_._EnumType_`.
 
-枚举常量必须在 32 位的整数范围之内。因为`枚举`值在通信线路上使用了[变长整型编码（varint encoding）](https://developers.google.com/protocol-buffers/docs/encoding)，而负值效率低，因此不推荐。你可以在一个消息定义的内部定义`枚举`，像上面的示例那样，或者外部——在你的 `.proto` 文件中，这些`枚举`可以在任一消息类型定义中复用。你也可以使用一个已经在某个消息中声明了的`枚举`类型，来作为不同的消息的某个字段的类型，用这个句法：`_MessageType_._EnumType_`。
+枚举常量必须在 32 位的整数范围之内。因为`枚举`值在通信线路上使用了[变长整型编码（varint encoding）](https://developers.google.com/protocol-buffers/docs/encoding)，而负值效率低，因此不推荐。你可以在一个消息定义的内部定义`枚举`，像上面的示例那样，或者外部——在你的 `.proto` 文件中，这些`枚举`可以在任一消息类型定义中重复使用。你也可以使用一个已经在某个消息中声明了的`枚举`类型，来作为不同的消息的某个字段的类型，用这个句法：`_MessageType_._EnumType_`。
 
 When you run the protocol buffer compiler on a .proto that uses an enum, the generated code will have a corresponding enum for Java or C++, a special EnumDescriptor class for Python that's used to create a set of symbolic constants with integer values in the runtime-generated class.
 

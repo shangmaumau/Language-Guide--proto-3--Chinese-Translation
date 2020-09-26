@@ -11,7 +11,7 @@ message ErrorStatus {
   repeated google.protobuf.Any details = 2;
 }
 
-The default type URL for a given message type is type.googleapis.com/_packagename_._messagename_.
+The default type URL for a given message type is `type.googleapis.com/_packagename_._messagename_`.
 
 Different language implementations will support runtime library helpers to pack and unpack Any values in a typesafe manner – for example, in Java, the Any type will have special pack() and unpack() accessors, while in C++ there are PackFrom() and UnpackTo() methods:
 
