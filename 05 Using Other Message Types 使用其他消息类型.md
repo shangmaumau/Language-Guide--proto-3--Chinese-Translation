@@ -39,7 +39,7 @@ import "myproject/other_protos.proto";
 
 By default you can only use definitions from directly imported .proto files. However, sometimes you may need to move a .proto file to a new location. Instead of moving the .proto file directly and updating all the call sites in a single change, now you can put a dummy .proto file in the old location to forward all the imports to the new location using the import public notion. import public dependencies can be transitively relied upon by anyone importing the proto containing the import public statement. For example:
 
-默认情况下，你只能使用来自直接导入的 `.proto` 文件中的定义。但是，有时候你可能需要把一个 `.proto` 文件移动到一个新位置。与直接移动 `.proto` 文件，然后一口气（in a single change）更新所有调用的地方不同的是，现在你可以使用 `import public` 的概念，来在老位置放一个傀儡<sup>[注]</sup> `.proto` 文件，以转递所有的 imports 到一个新位置。任何导入了包含着 import public 语句的 proto 的，都可以传递性地依赖 `import public` 依赖项。
+默认情况下，你只能使用来自直接导入的 `.proto` 文件中的定义。但是，有时候你可能需要把一个 `.proto` 文件移动到一个新位置。与直接移动 `.proto` 文件，然后一口气（in a single change）更新所有调用的地方不同的是，现在你可以使用 `import public` 的概念，来在老位置放一个傀儡<sup>[注]</sup> `.proto` 文件，以转递所有的 imports 到一个新位置。无论是谁导入了包含着 `import public` 语句的 proto，都可以传递性地依赖（transitively relied upon） `import public` 依赖项。
 
 （**注** `dummy` 更多采用的是“**虚设**”这样的译法，但我认为，虚设并不能准确表达这里的 dummy 的意思。虚设的意思是空有形式，并不起作用。但这里的 .proto 文件不要它能行吗？不行（无法转递了）。所以其实是有用的，就是作为一个傀儡，而背后有真正的操作者通过它来传达指令和接收请求。文中讲到的这个 .proto 文件就是这样的用途，傀儡，其实是非常准确传达了这个意味。）
 
@@ -66,7 +66,7 @@ import "old.proto";
 
 The protocol compiler searches for imported files in a set of directories specified on the protocol compiler command line using the -I/--proto_path flag. If no flag was given, it looks in the directory in which the compiler was invoked. In general you should set the --proto_path flag to the root of your project and use fully qualified names for all imports.
 
-protocol 编译器在一组由 protocol 编译器命令行使用 `-I` 或 `--proto_path` 标记指定的文件目录中搜索导入的文件。如果没有给定标记，它就在调起编译器的那个目录里寻找。通常而言，你应该给你的工程的根目录设置 `--proto_path` 标记，并为所有的 imports 使用[完全限定名称](https://en.wikipedia.org/wiki/Fully_qualified_name)。
+protocol 编译器在一组由 protocol 编译器命令行使用 `-I` 或 `--proto_path` 标记指定的文件目录中搜索导入的文件。如果没有给定标记，它就在调起编译器的那个目录里寻找。通常而言，你应该把 `--proto_path` 标记设置到你的工程的根目录，并为所有的 imports 使用[完全限定名称](https://en.wikipedia.org/wiki/Fully_qualified_name)。
 
 ## Using proto2 Message Types
 
