@@ -1,4 +1,3 @@
-05 Using Other Message Types
 
 # Using Other Message Types
 
