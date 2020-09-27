@@ -30,7 +30,7 @@ In the above example, the Result message type is defined in the same file as Sea
 
 You can use definitions from other .proto files by importing them. To import another .proto's definitions, you add an import statement to the top of your file:
 
-你可能通过*导入*来使用其他 `.proto` 文件中的（消息类型）定义。要导入另一个 `.proto` 的定义，你需要在你的文件的顶部添加一条 import 语句：
+你可以通过*导入*来使用其他 `.proto` 文件中的（消息类型）定义。要导入另一个 `.proto` 的定义，你需要在你的文件的顶部添加一条 import 语句：
 
 ```proto
 import "myproject/other_protos.proto";
