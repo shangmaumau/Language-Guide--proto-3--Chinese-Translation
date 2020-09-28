@@ -9,4 +9,4 @@ Unknown fields are well-formed protocol buffer serialized data representing fiel
 
 Originally, proto3 messages always discarded unknown fields during parsing, but in version 3.5 we reintroduced the preservation of unknown fields to match the proto2 behavior. In versions 3.5 and later, unknown fields are retained during parsing and included in the serialized output.
 
-最初，proto3 消息总是在解析期间丢弃掉未知字段，但在 3.5 版中我们重新引入了对未知字段的留存机制（preservation），来匹配 proto2 的行为。在 3.5 及之后的版本中，未知字段在解析期间会被保留和包含在序列化后的输入中。
+最初，proto3 消息总是在解析期间丢弃掉未知字段，但在 3.5 版中我们重新引入了对未知字段的留存机制（preservation），来匹配 proto2 的行为。在 3.5 及之后的版本中，未知字段在解析期间会被保留和包含在序列化后的输出中。
