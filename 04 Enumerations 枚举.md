@@ -94,7 +94,7 @@ For more information about how to work with message enums in your applications, 
 
 If you update an enum type by entirely removing an enum entry, or commenting it out, future users can reuse the numeric value when making their own updates to the type. This can cause severe issues if they later load old versions of the same .proto, including data corruption, privacy bugs, and so on. One way to make sure this doesn't happen is to specify that the numeric values (and/or names, which can also cause issues for JSON serialization) of your deleted entries are reserved. The protocol buffer compiler will complain if any future users try to use these identifiers. You can specify that your reserved numeric value range goes up to the maximum possible value using the max keyword.
 
-如果你通过完整地移除或注释一个枚举条目（entry）来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个枚举类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这些数字值。如果他们随后加载同样的、旧版本的 `.proto` 文件，就可能会导致严重的问题，包括数据损坏，隐私漏洞等等。能够确保这类严重问题不会发生的一个办法是，把你删除的条目的数字值指定为（和/或名称——也会在 JSON 序列化时引起问题）为 `reserved`。任何未来的用户如果尝试使用这些标识符，protocol buffer 编译器就会报错。你可以使用 `max` 关键字来指定你的保留的数字值可上达的最大可能值的范围。
+如果你通过完整地移除或注释一个枚举条目（entry）来[更新](https://developers.google.com/protocol-buffers/docs/proto3#updating)一个枚举类型，未来的用户在对这个类型进行他们自己的更新时，就可以再次使用这些数字值。如果他们随后加载同样的、旧版本的 `.proto` 文件，就可能会导致严重的问题，包括数据损坏，隐私漏洞等等。能够确保这类严重问题不会发生的一个办法是，把你删除的条目的数字值（和/或名称——也会在 JSON 序列化时引起问题）指定为 `reserved`。任何未来的用户如果尝试使用这些标识符，protocol buffer 编译器就会报错。你可以使用 `max` 关键字来指定你的保留的数字值可上达的最大可能值的范围。
 
 ```proto
 enum Foo {
