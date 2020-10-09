@@ -24,7 +24,7 @@ The default type URL for a given message type is `type.googleapis.com/_packagena
 
 Different language implementations will support runtime library helpers to pack and unpack Any values in a typesafe manner – for example, in Java, the Any type will have special pack() and unpack() accessors, while in C++ there are PackFrom() and UnpackTo() methods:
 
-不同语言的实现会支持运行时库协助者（runtime library helper）用一种类型安全的方式来打包和解包 Any 值——举例来说，在 Java 中，Any 类型会有一个特殊的 `pack()` 和 `unpack()` 访问器，而在 C++ 中则是 `PackFrom()` 和 `UnpackTo()` 方法：
+不同语言的实现会支持运行时库帮助器（runtime library helper）用一种类型安全的方式来打包和解包 Any 值——举例来说，在 Java 中，Any 类型会有一个特殊的 `pack()` 和 `unpack()` 访问器，而在 C++ 中则是 `PackFrom()` 和 `UnpackTo()` 方法：
 
 
 ```cpp
