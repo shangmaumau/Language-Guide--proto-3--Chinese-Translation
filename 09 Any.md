@@ -48,7 +48,7 @@ for (const Any& detail : status.details()) {
 
 Currently the runtime libraries for working with Any types are under development.
 
-**目前支持与 Any 类型一同工作的运行时库仍在开发中。**
+**目前可与 Any 类型一同工作的运行时库仍在开发中。**
 
 If you are already familiar with proto2 syntax, the Any can hold arbitrary proto3 messages, similar to proto2 messages which can allow extensions.
 
