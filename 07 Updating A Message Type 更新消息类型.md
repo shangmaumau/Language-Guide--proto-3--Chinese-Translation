@@ -42,7 +42,7 @@ If an existing message type no longer meets all your needs – for example, you'
 
 * For string, bytes, and message fields, optional is compatible with repeated. Given serialized data of a repeated field as input, clients that expect this field to be optional will take the last input value if it's a primitive type field or merge all input elements if it's a message type field. Note that this is not generally safe for numeric types, including bools and enums. Repeated fields of numeric types can be serialized in the packed format, which will not be parsed correctly when an optional field is expected.
 
-* 对于 `string`，`bytes`，和消息字段来说，`optional` 与 `repeated` 是兼容的。给定一个可重复字段的序列化后的数据作为输入，期待这个字段是 `optional` 的客户端会采用最后一个输入值——如果字段是[原始类型](https://zh.wikipedia.org/zh-cn/原始型別)的，或合并所有输入元素——如果字段是消息类型的。注意，对数字类型——包括布尔和枚举——来说，这条通常是不安全的。数字类型的可重复字段可被以 [packed](https://developers.google.com/protocol-buffers/docs/encoding#packed) 格式来序列化，当期待的是一个可选字段时，（这个可重复字段）就不会被正确解析。<sup>注</sup>
+* 对于 `string`，`bytes`，和消息字段来说，`optional` 与 `repeated` 是兼容的。给定一个可重复字段的序列化后的数据作为输入，期待这个字段是 `optional` 的客户端会采用最后一个输入值——如果字段是[原始类型](https://zh.wikipedia.org/zh-cn/原始型別)的，或合并所有输入元素——如果字段是消息类型的。注意，对数字类型——包括布尔和枚举——来说，这条通常是不安全的。数字类型的可重复字段可被以 [packed](https://developers.google.com/protocol-buffers/docs/encoding#packed) 格式来序列化，当期待的是一个可选字段时，（这个可重复字段）就不会被正确解析。<sup>[注]</sup>
 
 【**注**上段的意思是，假设我们输入一个序列化的可重复字段的数据，客户端想要的这个字段的类型却是可选的（因为它说可选与可重复是兼容的，下文就具体说如何处理），如果这个可重复字段的类型（输入端的类型）是原始类型的，客户端最终得到的是：可重复字段数据（即数组）的最后一个元素，如果这个可重复字段是消息类型的，客户端得到的就是把所有消息合并后的一个值（看不太懂它怎么合并）。后半段解释了因为数字类型的可重复字段会用特殊的 packed 格式来序列化，所以如果把它当作输入，也想解析成可选字段的值的话，就没办法正确解析。所以什么意思呢？**当我们说可选与可重复是兼容的时候，所有数字类型的类型，都不支持的。**】
 
