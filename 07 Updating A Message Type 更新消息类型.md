@@ -34,7 +34,7 @@ If an existing message type no longer meets all your needs – for example, you'
 
 * Embedded messages are compatible with bytes if the bytes contain an encoded version of the message.
 
-* 如果字节码包含了一个编码过的版本的消息，那内嵌的消息和它（**按**指字节码）是兼容的。
+* 如果字节码包含了一个编码过的版本的消息，那它与嵌入消息是兼容的。
 
 *  fixed32 is compatible with sfixed32, and fixed64 with sfixed64.
 
