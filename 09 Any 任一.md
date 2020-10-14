@@ -1,7 +1,7 @@
 
 # Any
 
-# Any
+# 任一
 
 The Any message type lets you use messages as embedded types without having their .proto definition. An Any contains an arbitrary serialized message as bytes, along with a URL that acts as a globally unique identifier for and resolves to that message's type. To use the Any type, you need to import google/protobuf/any.proto.
 
