@@ -8,7 +8,7 @@ If you have a message with many fields and where at most one field will be set a
 Oneof fields are like regular fields except all the fields in a oneof share memory, and at most one field can be set at the same time. Setting any member of the oneof automatically clears all the other members. You can check which value in a oneof is set (if any) using a special case() or WhichOneof() method, depending on your chosen language.
 
 
-如果你有一个拥有许多字段的消息，且同一次最多有一个字段会被设置，你可以通过使用 oneof 功能来强制此种行为并节省内存。
+如果你有一个拥有许多字段的消息，且同一次最多有一个字段会被设置，你可以通过使用 oneof 功能来强制此种行为并节省内存。
 
 Oneof 字段像普通的字段一样，唯一不同的是一个 oneof 中的所有字段共享（同一段）内存，且同一次最多只能设置一个字段。设置 oneof 中的任一个成员都会自动清空所有其他成员。你可以使用一个特殊的 `case()` 或 `WhichOneof()` 方法来检查 oneof 中的哪个值（如果有的话）被设置过了，（具体的方法）取决于你选择的语言。
 
@@ -18,8 +18,7 @@ Oneof 字段像普通的字段一样，唯一不同的是一个 oneof 中的所�
 
 To define a oneof in your .proto you use the oneof keyword followed by your oneof name, in this case test_oneof:
 
-
-要在你的 `.proto` 中定义一个 oneof，使用 `oneof` 关键字后面紧跟你的 oneof 名称，在这个例子 `test_oneof` 中：
+要在你的 `.proto` 中定义一个 oneof，你使用 `oneof` 关键字，你的 oneof 名称紧随其后，在这个例子 `test_oneof` 中：
 
 ```proto
 message SampleMessage {
@@ -72,9 +71,9 @@ In your generated code, oneof fields have the same getters and setters as regula
 
 * 映射 APIs 可与 oneof 字段工作。
 
-* 如果你把一个 oneof 字段设为其默认值（比如设置一个 `int32` 字段为 0），那个 oneof 字段的 "case" 就会被设置，且这个值在通信线路上会被序列化。
+* 如果你把一个 oneof 字段设为其默认值（比如设置一个 `int32` oneof 字段为 0），那个 oneof 字段的“条目”（"case"）就会被设置，且这个值在通信线路上会被序列化。
 
-* 如果你正在使用 C++，请确保你的代码不会导致内存崩溃。下面的示例代码会崩溃，因为 `sub_message` 已经通过调用 `set_name()` 方法被删除了。
+* 如果你正在使用 C++，请确保你的代码不会导致内存崩溃。下面的示例代码会崩溃，因为 `sub_message` 已经（被你）通过调用 `set_name()` 方法删除了。
 
     ```cpp
     SampleMessage message;
@@ -85,7 +84,7 @@ In your generated code, oneof fields have the same getters and setters as regula
 
 * Again in C++, if you Swap() two messages with oneofs, each message will end up with the other’s oneof case: in the example below, msg1 will have a sub_message and msg2 will have a name.
 
-* 同样在 C++ 中，如果你用（多个） oneof(s) `Swap()` 了两条消息， 每条消息都会以另外一个的 oneof case 结尾：在下面示例中，`msg1` 会有一个 `sub_message` 且 `msg2` 会有一个 `name` 。
+* 同样在 C++ 中，如果你用（多个） oneof(s) `Swap()` 了两条消息， 每条消息都会以另一个的 oneof 条目（case）结尾：在下面示例中，`msg1` 会有一个 `sub_message` 且 `msg2` 会有一个 `name` 。
 
     ```cpp
     SampleMessage msg1;
@@ -103,17 +102,19 @@ In your generated code, oneof fields have the same getters and setters as regula
 
 Be careful when adding or removing oneof fields. If checking the value of a oneof returns None/NOT_SET, it could mean that the oneof has not been set or it has been set to a field in a different version of the oneof. There is no way to tell the difference, since there's no way to know if an unknown field on the wire is a member of the oneof.
 
-在添加或移除 oneof 字段时请务必小心。如果检查一个 oneof 的值返回了 `None` 或 `NOT_SET`，它可能意味着 oneof 尚未被设置过或者它已被设置过，但是在一个不同版本的 oneof 中。要分辨出不同是毫无办法的，因为没有办法知道一个通信线路上的未知字段是否是 oneof 的一个成员。
+在添加或移除 oneof 字段时请务必小心。如果检查一个 oneof 的值返回了 `None` 或 `NOT_SET`，它可能意味着 oneof 尚未被设置过或者它已在一个不同版本的 oneof 中被设置过。毫无办法来分辨其不同，因为毫无办法知道一个通信线路上的未知字段是否是 oneof 的一个成员。
 
 ### Tag Reuse Issues
 
 ### 标记重用问题
 
-    Move fields into or out of a oneof: You may lose some of your information (some fields will be cleared) after the message is serialized and parsed. However, you can safely move a single field into a new oneof and may be able to move multiple fields if it is known that only one is ever set.
-    Delete a oneof field and add it back: This may clear your currently set oneof field after the message is serialized and parsed.
-    Split or merge oneof: This has similar issues to moving regular fields.
+Move fields into or out of a oneof: You may lose some of your information (some fields will be cleared) after the message is serialized and parsed. However, you can safely move a single field into a new oneof and may be able to move multiple fields if it is known that only one is ever set.
 
-* **移入或移出 oneof 的字段**：消息序列化并解析后，你可能会丢失你的一部分信息（一些字段会被清空）。不过，你可以安全地移动一个单独的字段到一个**新的** oneof 中，且如果已知不管任何时候仅有一个字段会被设置，还可以移除多条字段。
+Delete a oneof field and add it back: This may clear your currently set oneof field after the message is serialized and parsed.
+
+Split or merge oneof: This has similar issues to moving regular fields.
+
+* **移入或移出 oneof 的字段**：消息序列化并解析后，你可能会丢失你的一部分信息（一些字段会被清空）。不过，你可以安全地移动一个单独的字段到一个**新的** oneof 中，且如果已知不管任何时候仅有一个字段会被设置，还可以移除多条字段。
 
 * **删除一个 oneof 字段然后再添加回来**：消息序列化并解析后，这会清空掉你的 oneof 字段的已有设置。
 
