@@ -108,13 +108,13 @@ Be careful when adding or removing oneof fields. If checking the value of a oneo
 
 ### 标记重用问题
 
-Move fields into or out of a oneof: You may lose some of your information (some fields will be cleared) after the message is serialized and parsed. However, you can safely move a single field into a new oneof and may be able to move multiple fields if it is known that only one is ever set.
+* Move fields into or out of a oneof: You may lose some of your information (some fields will be cleared) after the message is serialized and parsed. However, you can safely move a single field into a new oneof and may be able to move multiple fields if it is known that only one is ever set.
 
-Delete a oneof field and add it back: This may clear your currently set oneof field after the message is serialized and parsed.
+* Delete a oneof field and add it back: This may clear your currently set oneof field after the message is serialized and parsed.
 
-Split or merge oneof: This has similar issues to moving regular fields.
+* Split or merge oneof: This has similar issues to moving regular fields.
 
-* **移入或移出 oneof 的字段**：消息序列化并解析后，你可能会丢失你的一部分信息（一些字段会被清空）。不过，你可以安全地移动一个单独的字段到一个**新的** oneof 中，且如果已知不管任何时候仅有一个字段会被设置，还可以移除多条字段。
+* **移入或移出 oneof 的字段**：消息序列化并解析后，你可能会丢失你的一部分信息（一些字段会被清空）。不过，你可以安全地移动一个单独的字段到一个**新的** oneof 中，且如果已知不管任何时候仅有一个字段会被设置，还能移动多条字段。
 
 * **删除一个 oneof 字段然后再添加回来**：消息序列化并解析后，这会清空掉你的 oneof 字段的已有设置。
 
