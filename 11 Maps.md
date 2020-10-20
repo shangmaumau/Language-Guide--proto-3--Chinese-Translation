@@ -1,14 +1,22 @@
-11 Maps.md
 
-Maps
+# Maps
+
+# 映射表
 
 If you want to create an associative map as part of your data definition, protocol buffers provides a handy shortcut syntax:
 
+如果你想创建一个关联映射表作为你的数据定义的一部分，protocol buffers 提供了一个便利的快捷句法：
+
+```proto
 map<key_type, value_type> map_field = N;
+```
 
 ...where the key_type can be any integral or string type (so, any scalar type except for floating point types and bytes). Note that enum is not a valid key_type. The value_type can be any type except another map.
 
+……其中 key_type 可以是任意整数或字符串类型（即，除浮点类型和字节码之外的任意标量类型）。注意，枚举并非一个有效的 key_type。value_type 可以是除另外一种 map 之外的任意类型。
+
 So, for example, if you wanted to create a map of projects where each Project message is associated with a string key, you could define it like this:
+
 
 map<string, Project> projects = 3;
 
