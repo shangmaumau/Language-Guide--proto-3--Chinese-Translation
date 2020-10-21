@@ -37,7 +37,7 @@ map<string, Project> projects = 3;
 
 The generated map API is currently available for all proto3 supported languages. You can find out more about the map API for your chosen language in the relevant API reference.
 
-生成的映射表 API 当前对所有 proto3 支持的语言都是可用的。更多关于你选择的语言的映射表 API 的信息，你可以在相关 [API 参考](https://developers.google.com/protocol-buffers/docs/reference/overview)中查看到。
+生成的映射表 API 当前对所有 proto3 支持的语言都是可用的。有关你选择的语言的映射表 API 的更多信息，你可以在相关 [API 参考](https://developers.google.com/protocol-buffers/docs/reference/overview)中查看到。
 
 ## Backwards compatibility
 
@@ -45,7 +45,7 @@ The generated map API is currently available for all proto3 supported languages.
 
 The map syntax is equivalent to the following on the wire, so protocol buffers implementations that do not support maps can still handle your data:
 
-映射表句法在通信线路上，和下面（的形式）等同，以使不支持映射表的 protocol buffers 实现仍能处理你的数据：
+映射表句法在通信线路上，和下面（的形式）等同，因此不支持映射表的 protocol buffers 实现仍能处理你的数据：
 
 ```proto
 message MapFieldEntry {
