@@ -38,11 +38,17 @@ The way a package specifier affects the generated code depends on your chosen la
 
 * 在 C++ 中，生成的类们包裹在一个 C++ 命名空间内部。例如，Open 会在 foo::bar 命名空间内。
 * 在 Java 中，包会被作为 Java 包来使用，除非你在你的 .proto 文件中显式地提供一个 java_package 选项。
-* 在 Python 里，包指令被忽略，因为 Python 模块会根据它们在文件系统中的位置来管理。
+* 在 Python 里，包指令被忽略，因为 Python 模块是按照它们在文件系统中的位置来管理的。
 * 在 Go 里，包会被作为 Go 包名称来使用，除非你在你的 .proto 文件中显式地提供一个 go_package 选项。
+* 在 Ruby 中，生成的类们包裹在嵌套的 Ruby 命名空间内部，转换成规定的 Ruby 大写风格（首字母大写；如果第一个字符不是一个字母，则前缀 PB_）。例如，Open 会在 Foo::Bar 命名空间内。
+* 在 C# 中，包在转换为帕斯卡命名（**按**每个单词的首字母大写，不区分是否在最前面）后被作为命名空间来使用，除非你在你的 .proto 文件中显式地提供一个 csharp_namespace 选项。例如，Open 会在 Foo.Bar 命名空间内。
 
-Packages and Name Resolution
+## Packages and Name Resolution
+
+## 包与名称解析
 
 Type name resolution in the protocol buffer language works like C++: first the innermost scope is searched, then the next-innermost, and so on, with each package considered to be "inner" to its parent package. A leading '.' (for example, .foo.bar.Baz) means to start from the outermost scope instead.
 
 The protocol buffer compiler resolves all type names by parsing the imported .proto files. The code generator for each language knows how to refer to each type in that language, even if it has different scoping rules.
+
+类型名称解析在 protocol buffer 语言中的工作方式类似 C++：首先最内层的作用域被搜索，然后是次一级的最内层，依此类推，每个包被认为在其父一级的包的“内部”。相反的，最前面有一个‘.’（例如，`.foo.bar.Baz`）则意味着从外层的作用域开始。
