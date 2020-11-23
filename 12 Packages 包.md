@@ -51,6 +51,6 @@ Type name resolution in the protocol buffer language works like C++: first the i
 
 The protocol buffer compiler resolves all type names by parsing the imported .proto files. The code generator for each language knows how to refer to each type in that language, even if it has different scoping rules.
 
-类型名称解析在 protocol buffer 语言中的工作方式类似 C++：首先最内层的作用域被搜索，然后是次一级的最内层，依此类推，每个包被认为在其父一级的包的“内部”。相反的，最前面有一个‘.’（例如，`.foo.bar.Baz`）则意味着从外层的作用域开始。
+类型名称解析在 protocol buffer 语言中的工作方式类似 C++：首先最内层的作用域被搜索，然后是次一级的最内层，依此类推，每个包被认为在其父一级的包的“内部”。相反的，最前面有一个‘.’（例如，`.foo.bar.Baz`）则意味着从最外层的作用域开始。
 
 protocol buffer 编译器通过解析导入的 `.proto` 文件来确定（resovle）所有的类型名称。每种语言的代码生成器知道怎样以那种语言来引用每种类型，即使它拥有不同的作用域规则。
