@@ -1,4 +1,3 @@
-13 Defining Services.md
 
 # Defining Services
 
@@ -6,7 +5,7 @@
 
 If you want to use your message types with an RPC (Remote Procedure Call) system, you can define an RPC service interface in a .proto file and the protocol buffer compiler will generate service interface code and stubs in your chosen language. So, for example, if you want to define an RPC service with a method that takes your SearchRequest and returns a SearchResponse, you can define it in your .proto file as follows:
 
-如果你想与一个 RPC（远程过程调用）一起使用你的消息类型，你可以在一个 .proto 文件中定义一个 RPC 服务接口，然后 protocol buffer 编译器就会生成服务接口代码并以你选择的语言插桩（stub）。
+如果你想与一个 RPC（远程过程调用）一起使用你的消息类型，你可以在一个 `.proto` 文件中定义一个 RPC 服务接口，然后 protocol buffer 编译器就会生成服务接口代码并以你选择的语言插桩（stub）。那么，举个例子，如果你想定义一个 RPC 服务——一个方法，拿着你的 `SearchRequest` 然后返回一个 `SearchResponse`，你可以像下面这样在你的 `.proto` 文件中定义它：
 
 ```proto
 service SearchService {

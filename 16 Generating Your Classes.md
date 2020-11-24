@@ -1,8 +1,12 @@
-16 Generating Your Classes
 
-Generating Your Classes
+# Generating Your Classes
+
+# 生成你的类们
+
 
 To generate the Java, Python, C++, Go, Ruby, Objective-C, or C# code you need to work with the message types defined in a .proto file, you need to run the protocol buffer compiler protoc on the .proto. If you haven't installed the compiler, download the package and follow the instructions in the README. For Go, you also need to install a special code generator plugin for the compiler: you can find this and installation instructions in the golang/protobuf repository on GitHub.
+
+
 
 The Protocol Compiler is invoked as follows:
 
